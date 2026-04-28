@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiki — Geometría Analítica: Cónicas</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2eb;
+    --surface: #fdfaf4;
+    --border: #c8b99a;
+    --border-light: #e0d5c0;
+    --ink: #1a1209;
+    --ink-secondary: #4a3f2f;
+    --ink-muted: #7a6a55;
+    --accent: #8b1a1a;
+    --accent-soft: #b5372a;
+    --accent-bg: #f9ede8;
+    --yellow: #d4a017;
+    --yellow-bg: #fdf6e3;
+    --blue: #1a4a8b;
+    --blue-bg: #e8f0f9;
+    --green: #1a6b3a;
+    --green-bg: #e8f5ee;
+    --purple: #5a1a8b;
+    --purple-bg: #f0e8f9;
+    --shadow: 0 1px 3px rgba(26,18,9,0.12);
+    --shadow-md: 0 4px 12px rgba(26,18,9,0.1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: var(--ink);
+    color: #f5f2eb;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--accent);
+  }
+  .site-header .logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #f5f2eb;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .site-header .logo span { color: var(--yellow); }
+  .header-sep { flex: 1; }
+  .header-tag {
+    font-size: 0.72rem;
+    color: #a09070;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 52px);
+  }
+
+  /* SIDEBAR */
+  aside {
+    border-right: 1px solid var(--border);
+    padding: 1.5rem 1rem;
+    position: sticky;
+    top: 52px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+    background: var(--surface);
+  }
+  .toc-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .toc-section { margin-bottom: 1.2rem; }
+  .toc-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+  }
+  .toc-list { list-style: none; }
+  .toc-list li { border-left: 2px solid transparent; margin-bottom: 1px; }
+  .toc-list li:hover { border-left-color: var(--accent); }
+  .toc-list a {
+    display: block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.88rem;
+    color: var(--ink-secondary);
+    text-decoration: none;
+    transition: color 0.15s;
+    border-radius: 2px;
+  }
+  .toc-list a:hover { color: var(--accent); background: var(--accent-bg); }
+  .toc-list .sub {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    padding-left: 1.2rem;
+  }
+
+  /* MAIN */
+  main {
+    padding: 2rem 2.5rem 4rem;
+    max-width: 860px;
+  }
+
+  /* ARTICLE HEADER */
+  .article-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.8rem;
+    animation: fadeIn 0.5s ease;
+  }
+  .article-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
+  }
+  .article-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .article-meta {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .article-meta span::before { content: '· '; }
+  .article-meta span:first-child::before { content: ''; }
+
+  /* INFOBOX */
+  .infobox {
+    float: right;
+    width: 260px;
+    margin: 0 0 1.5rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    font-size: 0.85rem;
+    box-shadow: var(--shadow);
+  }
+  .infobox-title {
+    background: var(--ink);
+    color: #f5f2eb;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.88rem;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    border-radius: 3px 3px 0 0;
+  }
+  .infobox table { width: 100%; border-collapse: collapse; }
+  .infobox td {
+    padding: 0.4rem 0.8rem;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+  .infobox td:first-child {
+    font-weight: 600;
+    color: var(--ink-secondary);
+    width: 45%;
+    font-size: 0.78rem;
+  }
+  .infobox tr:last-child td { border-bottom: none; }
+
+  /* SECTIONS */
+  section { margin-bottom: 2.5rem; animation: fadeUp 0.4s ease; }
+  
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin: 1.4rem 0 0.6rem;
+  }
+
+  p { margin-bottom: 0.9rem; color: var(--ink-secondary); }
+
+  /* CONIC CARDS */
+  .conic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.2rem 0;
+  }
+  .conic-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .conic-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .conic-card-header {
+    padding: 0.7rem 1rem;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+  }
+  .conic-card-header .icon { font-size: 1.1rem; }
+  .card-circunferencia .conic-card-header { background: var(--blue); }
+  .card-parabola .conic-card-header { background: var(--green); }
+  .card-elipse .conic-card-header { background: var(--purple); }
+  .card-hiperbola .conic-card-header { background: var(--accent); }
+
+  .conic-card-body { padding: 0.8rem 1rem; }
+  .conic-card-body p { font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--ink-secondary); }
+  .formula-pill {
+    font-family: 'Fira Mono', monospace;
+    font-size: 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 0.3rem 0.6rem;
+    display: inline-block;
+    color: var(--ink);
+  }
+
+  /* STEP BOXES */
+  .steps-container { margin: 1rem 0; }
+  .step {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    align-items: start;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+  .step-content { padding-top: 0.3rem; }
+  .step-title {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+  .step-text {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+  .step-formula {
+    font-family: 'Fira Mono', monospace;
+    font-size: 0.8rem;
+    background: var(--bg);
+    border-left: 3px solid var(--accent);
+    padding: 0.35rem 0.7rem;
+    margin-top: 0.4rem;
+    border-radius: 0 3px 3px 0;
+    color: var(--ink);
+  }
+
+  /* EXERCISE BLOCKS */
+  .exercise-block {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .exercise-header {
+    padding: 0.6rem 1rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .exercise-header:hover { filter: brightness(0.95); }
+  .ex-circunferencia .exercise-header { background: var(--blue-bg); color: var(--blue); border-bottom: 1px solid #c5d8f0; }
+  .ex-parabola .exercise-header { background: var(--green-bg); color: var(--green); border-bottom: 1px solid #b5e0c8; }
+  .ex-elipse .exercise-header { background: var(--purple-bg); color: var(--purple); border-bottom: 1px solid #d0b8f0; }
+  .ex-hiperbola .exercise-header { background: var(--accent-bg); color: var(--accent); border-bottom: 1px solid #f0c0b0; }
+  .exercise-body { padding: 1rem; font-size: 0.88rem; }
+  .exercise-body .eq {
+    font-family: 'Fira Mono', monospace;
+    font-size: 0.82rem;
+    background: var(--bg);
+    padding: 0.5rem 0.8rem;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    border: 1px solid var(--border-light);
+  }
+  .exercise-body .result {
+    font-weight: 700;
+    color: var(--accent);
+    padding: 0.5rem 0.8rem;
+    background: var(--accent-bg);
+    border-radius: 4px;
+    border-left: 3px solid var(--accent);
+    margin-top: 0.7rem;
+    font-size: 0.88rem;
+  }
+  .collapsible { display: block; }
+  .chevron { margin-left: auto; transition: transform 0.2s; }
+  .collapsed .chevron { transform: rotate(-90deg); }
+  .collapsed .collapsible { display: none; }
+
+  /* NOTE / WARNING BOXES */
+  .note-box {
+    background: var(--yellow-bg);
+    border: 1px solid #e0c060;
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 4px 4px 0;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+    color: var(--ink-secondary);
+  }
+  .note-box strong { color: #8a6000; }
+
+  /* TOOLS SECTION */
+  .tool-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .tool-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    background: var(--surface);
+  }
+  .tool-card h4 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .tool-card p { font-size: 0.82rem; }
+  .tool-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    transition: color 0.15s;
+  }
+  .tool-link:hover { color: var(--accent-soft); }
+
+  /* REFERENCES */
+  .ref-list { list-style: none; }
+  .ref-list li {
+    font-size: 0.82rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--ink-secondary);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .ref-list li::before {
+    content: '↗';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* CLEARFIX */
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+
+  /* SCROLLBAR */
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { display: none; }
+    main { padding: 1.2rem; }
+    .conic-grid, .tool-cards { grid-template-columns: 1fr; }
+    .infobox { float: none; width: 100%; margin: 1rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#"><span>Wiki</span>Geo</a>
+  <span class="header-sep"></span>
+  <span class="header-tag">Fundamentos de Matemáticas · Areandina 2026</span>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="toc-title">Tabla de contenido</div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">Introducción</div>
+      <ul class="toc-list">
+        <li><a href="#intro">¿Qué son las cónicas?</a></li>
+        <li><a href="#resumen">Resumen de formas</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">Las cuatro cónicas</div>
+      <ul class="toc-list">
+        <li><a href="#circunferencia">Circunferencia</a></li>
+        <li><a href="#parabola">Parábola</a></li>
+        <li><a href="#elipse">Elipse</a></li>
+        <li><a href="#hiperbola">Hipérbola</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">Ejercicios resueltos</div>
+      <ul class="toc-list">
+        <li><a href="#ej-kevin">Kevin Gómez</a>
+          <ul class="toc-list">
+            <li class="sub"><a href="#ej-kevin">· Completar cuadrado</a></li>
+          </ul>
+        </li>
+        <li><a href="#ej-jonathan">Jonathan Díaz</a>
+          <ul class="toc-list">
+            <li class="sub"><a href="#ej-jonathan">· Datos geométricos</a></li>
+          </ul>
+        </li>
+        <li><a href="#ej-jhener">Jhener Calvache</a>
+          <ul class="toc-list">
+            <li class="sub"><a href="#ej-jhener">· Completar cuadrado</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">Herramientas TIC</div>
+      <ul class="toc-list">
+        <li><a href="#herramientas">GeoGebra y Desmos</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-section">
+      <div class="toc-section-title">Referencias</div>
+      <ul class="toc-list">
+        <li><a href="#referencias">Bibliografía</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ARTICLE HEADER -->
+    <div class="article-header">
+      <div class="article-label">Geometría Analítica · Eje 4 — Teoría de las Cónicas</div>
+      <h1 class="article-title">Curvas Cónicas y su Geometría</h1>
+      <div class="article-meta">
+        <span>Angulo Franklin · Calvache Jhener · Díaz Jonathan · Gómez Kevin</span>
+        <span>Ing. de Software, Fundación Universitaria Areandina</span>
+        <span>27 de abril de 2026</span>
+      </div>
+    </div>
+
+    <!-- INTRO + INFOBOX -->
+    <section id="intro" class="clearfix">
+      <div class="infobox">
+        <div class="infobox-title">Ficha de las Cónicas</div>
+        <table>
+          <tr><td>Área</td><td>Geometría Analítica</td></tr>
+          <tr><td>Tipos</td><td>Circunferencia, Parábola, Elipse, Hipérbola</td></tr>
+          <tr><td>Origen</td><td>Sección de un cono con un plano</td></tr>
+          <tr><td>Herramienta</td><td>GeoGebra, Desmos</td></tr>
+          <tr><td>Técnica clave</td><td>Completar el cuadrado</td></tr>
+          <tr><td>Forma general</td><td>Ax²+Bxy+Cy²+Dx+Ey+F=0</td></tr>
+        </table>
+      </div>
+
+      <h2>¿Qué son las curvas cónicas?</h2>
+      <p>Las <strong>cónicas</strong> son curvas que se obtienen al cortar un cono doble con un plano. Dependiendo del ángulo de corte, obtenemos cuatro figuras distintas: la <em>circunferencia</em>, la <em>elipse</em>, la <em>parábola</em> y la <em>hipérbola</em>.</p>
+      <p>En geometría analítica, cada una tiene una ecuación característica que relaciona las coordenadas <strong>x</strong> e <strong>y</strong> de todos sus puntos. La clave para trabajar con ellas es aprender a identificarlas y a transformar su ecuación de la <em>forma general</em> a la <em>forma estándar</em>.</p>
+
+      <div class="note-box">
+        <strong>💡 Consejo clave:</strong> La técnica más importante para transformar ecuaciones cónicas se llama <em>"completar el cuadrado"</em>. La estudiaremos paso a paso en los ejercicios resueltos.
+      </div>
+    </section>
+
+    <!-- RESUMEN DE FORMAS -->
+    <section id="resumen">
+      <h2>Las cuatro cónicas de un vistazo</h2>
+      <div class="conic-grid">
+        <div class="conic-card card-circunferencia">
+          <div class="conic-card-header"><span class="icon">⬤</span> Circunferencia</div>
+          <div class="conic-card-body">
+            <p>Caso especial de elipse donde ambos ejes son iguales. Todos los puntos equidistan del centro.</p>
+            <span class="formula-pill">(x−h)² + (y−k)² = r²</span>
+          </div>
+        </div>
+        <div class="conic-card card-parabola">
+          <div class="conic-card-header"><span class="icon">⌒</span> Parábola</div>
+          <div class="conic-card-body">
+            <p>Equidista de un punto fijo (foco) y una recta fija (directriz). Abre hacia un lado.</p>
+            <span class="formula-pill">(y−k)² = 4p(x−h)</span>
+          </div>
+        </div>
+        <div class="conic-card card-elipse">
+          <div class="conic-card-header"><span class="icon">⬭</span> Elipse</div>
+          <div class="conic-card-body">
+            <p>La <em>suma</em> de distancias a dos focos es constante. Tiene eje mayor y eje menor.</p>
+            <span class="formula-pill">(x−h)²/a² + (y−k)²/b² = 1</span>
+          </div>
+        </div>
+        <div class="conic-card card-hiperbola">
+          <div class="conic-card-header"><span class="icon">⌓</span> Hipérbola</div>
+          <div class="conic-card-body">
+            <p>La <em>diferencia</em> de distancias a dos focos es constante. Tiene dos ramas y asíntotas.</p>
+            <span class="formula-pill">(x−h)²/a² − (y−k)²/b² = 1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIRCUNFERENCIA -->
+    <section id="circunferencia">
+      <h2>Circunferencia (El Círculo)</h2>
+      <p>Es el <strong>lugar geométrico</strong> de todos los puntos que están a la misma distancia <em>r</em> (radio) de un punto fijo llamado <strong>centro (h, k)</strong>. Es un caso particular de la elipse donde los dos ejes son iguales.</p>
+      <h3>Forma estándar</h3>
+      <p>Su ecuación canónica es:</p>
+      <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--blue-bg); border:1px solid #c5d8f0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--blue);">
+        (x − h)² + (y − k)² = r²
+      </div>
+      <p>Donde <code>(h, k)</code> es el centro y <code>r</code> es el radio. Cuando el centro está en el origen, se simplifica a <code>x² + y² = r²</code>.</p>
+    </section>
+
+    <!-- PARÁBOLA -->
+    <section id="parabola">
+      <h2>Parábola</h2>
+      <p>Es el lugar geométrico de los puntos que <strong>equidistan</strong> de un punto fijo llamado <em>foco</em> y de una recta fija llamada <em>directriz</em>. Su ecuación general más conocida es <code>y = ax² + bx + c</code>.</p>
+      <h3>Formas estándar</h3>
+      <p>Dependiendo de la orientación de apertura:</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin:0.8rem 0; font-family:'Fira Mono',monospace; font-size:0.82rem;">
+        <div style="background:var(--green-bg); border:1px solid #b5e0c8; border-radius:4px; padding:0.6rem; color:var(--green);">
+          Horizontal:<br><strong>(y−k)² = 4p(x−h)</strong>
+        </div>
+        <div style="background:var(--green-bg); border:1px solid #b5e0c8; border-radius:4px; padding:0.6rem; color:var(--green);">
+          Vertical:<br><strong>(x−h)² = 4p(y−k)</strong>
+        </div>
+      </div>
+      <p>El <strong>vértice</strong> es <code>(h, k)</code> y <strong>p</strong> determina la distancia al foco. Si p > 0 abre a la derecha/arriba; si p < 0 abre a la izquierda/abajo.</p>
+    </section>
+
+    <!-- ELIPSE -->
+    <section id="elipse">
+      <h2>Elipse</h2>
+      <p>Es el lugar geométrico de los puntos tal que la <strong>suma</strong> de sus distancias a dos puntos fijos llamados <em>focos</em> es siempre igual a una constante <strong>2a</strong>. Sus elementos son: centro (h,k), eje mayor (2a), eje menor (2b) y distancia focal (2c).</p>
+      <h3>Forma estándar</h3>
+      <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--purple-bg); border:1px solid #d0b8f0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--purple);">
+        (x−h)²/a² + (y−k)²/b² = 1
+      </div>
+      <p>Relación fundamental: <code>c² = a² − b²</code>. Si <strong>a² > b²</strong>, el eje mayor es horizontal; si <strong>b² > a²</strong>, el eje mayor es vertical.</p>
+    </section>
+
+    <!-- HIPÉRBOLA -->
+    <section id="hiperbola">
+      <h2>Hipérbola</h2>
+      <p>Es el lugar geométrico de los puntos tal que la <strong>diferencia</strong> (en valor absoluto) de sus distancias a dos focos es constante e igual a <strong>2a</strong>. Se distingue visualmente por tener dos ramas separadas y unas líneas guía llamadas <em>asíntotas</em>.</p>
+      <h3>Forma estándar</h3>
+      <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--accent-bg); border:1px solid #f0c0b0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--accent);">
+        (x−h)²/a² − (y−k)²/b² = 1
+      </div>
+      <p>Las <strong>asíntotas</strong> son las rectas <code>y − k = ±(b/a)(x − h)</code>. La hipérbola se aproxima a ellas infinitamente sin tocarlas nunca.</p>
+    </section>
+
+    <!-- EJERCICIOS KEVIN -->
+    <section id="ej-kevin">
+      <h2>Ejercicios resueltos — Kevin Gómez</h2>
+      <p>Estos ejercicios parten de ecuaciones en <em>forma general</em> y las transforman a <em>forma estándar</em> mediante la técnica de <strong>completar el cuadrado</strong>.</p>
+
+      <div class="note-box">
+        <strong>📐 ¿Cómo completar el cuadrado?</strong> Tomamos el coeficiente del término lineal, lo dividimos entre 2 y lo elevamos al cuadrado. Ese número se suma a <em>ambos lados</em> de la ecuación para mantener la igualdad.
+      </div>
+
+      <!-- Ejercicio 1 -->
+      <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬤</span> Ejercicio 1 — Circunferencia
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p><strong>Ecuación general:</strong></p>
+          <div class="eq">x² + y² + 4x − 6y + 9 = 0</div>
+          <div class="steps-container">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">Agrupamos x e y y pasamos la constante</div>
+                <div class="step-formula">(x² + 4x) + (y² − 6y) = −9</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">Completamos el cuadrado</div>
+                <p class="step-text">Para x: (4÷2)² = 4 · Para y: (6÷2)² = 9. Se suman a ambos lados.</p>
+                <div class="step-formula">(x² + 4x + 4) + (y² − 6y + 9) = −9 + 4 + 9</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">Forma estándar final</div>
+                <div class="step-formula">(x + 2)² + (y − 3)² = 4</div>
+              </div>
+            </div>
+          </div>
+          <div class="result">✅ Centro (−2, 3) · Radio r = 2</div>
+        </div>
+      </div>
+
+      <!-- Ejercicio 2 -->
+      <div class="exercise-block ex-parabola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌒</span> Ejercicio 2 — Parábola
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p><strong>Ecuación general:</strong></p>
+          <div class="eq">y² − 6y − 4x + 1 = 0</div>
+          <div class="steps-container">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">Agrupamos y, pasamos x al otro lado</div>
+                <div class="step-formula">(y² − 6y) = 4x − 1</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">Completamos el cuadrado en y</div>
+                <p class="step-text">Para y: (6÷2)² = 9. Sumamos 9 a ambos lados.</p>
+                <div class="step-formula">(y² − 6y + 9) = 4x − 1 + 9</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">Simplificamos y factorizamos</div>
+                <div class="step-formula">(y − 3)² = 4(x + 2)</div>
+              </div>
+            </div>
+          </div>
+          <div class="result">✅ Vértice (−2, 3) · Abre hacia la derecha (p > 0)</div>
+        </div>
+      </div>
+
+      <!-- Ejercicio 3 -->
+      <div class="exercise-block ex-elipse" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬭</span> Ejercicio 3 — Elipse
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p><strong>Ecuación general:</strong></p>
+          <div class="eq">25x² + 16y² + 100x − 96y − 156 = 0</div>
+          <div class="steps-container">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">Agrupamos y factorizamos coeficientes</div>
+                <div class="step-formula">25(x² + 4x) + 16(y² − 6y) = 156</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">Completamos el cuadrado (¡ojo con los coeficientes!)</div>
+                <p class="step-text">Lo que agregamos dentro del paréntesis se multiplica por el factor de afuera: 25×4 = 100 y 16×9 = 144.</p>
+                <div class="step-formula">25(x² + 4x + 4) + 16(y² − 6y + 9) = 156 + 100 + 144</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">Simplificamos y dividimos entre 400</div>
+                <div class="step-formula">(x + 2)²/16 + (y − 3)²/25 = 1</div>
+              </div>
+            </div>
+          </div>
+          <div class="result">✅ Centro (−2, 3) · a² = 25 (eje mayor vertical) · b² = 16</div>
+        </div>
+      </div>
+
+      <!-- Ejercicio 4 -->
+      <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌓</span> Ejercicio 4 — Hipérbola
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p><strong>Ecuación general:</strong></p>
+          <div class="eq">9x² − 16y² + 36x + 96y − 252 = 0</div>
+          <div class="steps-container">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">Agrupamos y factorizamos (¡cuidado con el signo negativo!)</div>
+                <div class="step-formula">9(x² + 4x) − 16(y² − 6y) = 252</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">Completamos el cuadrado</div>
+                <p class="step-text">El término de y se <em>resta</em> por el −16 de afuera: 252 + 36 − 144 = 144.</p>
+                <div class="step-formula">9(x + 2)² − 16(y − 3)² = 144</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">Dividimos todo entre 144</div>
+                <div class="step-formula">(x + 2)²/16 − (y − 3)²/9 = 1</div>
+              </div>
+            </div>
+          </div>
+          <div class="result">✅ Centro (−2, 3) · Abre horizontalmente · a² = 16 · b² = 9</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EJERCICIOS JONATHAN -->
+    <section id="ej-jonathan">
+      <h2>Ejercicios resueltos — Jonathan Díaz</h2>
+      <p>Estos ejercicios parten de <em>datos geométricos</em> (centros, vértices, puntos) para construir la ecuación de la cónica.</p>
+
+      <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬤</span> Ejercicio 1 — Circunferencia con centro (4,0) por el punto (7,4)
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p>Calculamos el radio usando la fórmula de distancia entre el centro y el punto dado:</p>
+          <div class="eq">r² = (7 − 4)² + (4 − 0)² = 9 + 16 = 25 → r = 5</div>
+          <div class="result">✅ (x − 4)² + y² = 25</div>
+        </div>
+      </div>
+
+      <div class="exercise-block ex-parabola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌒</span> Ejercicio 2 — Parábola con vértice (4,0) por el punto (6,4)
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p>Sustituimos el punto en la forma estándar para encontrar p:</p>
+          <div class="eq">4² = 4p(6 − 4) → 16 = 8p → p = 2</div>
+          <div class="result">✅ y² = 8(x − 4)</div>
+        </div>
+      </div>
+
+      <div class="exercise-block ex-elipse" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬭</span> Ejercicio 3 — Elipse con centro (4,0), vértice (9,0), co-vértice (4,3)
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p>Calculamos a y b midiendo las distancias del centro a los vértices:</p>
+          <div class="eq">a = 9 − 4 = 5 · b = 3</div>
+          <p>Verificación: sustituyendo el vértice (9,0) debe dar 1.</p>
+          <div class="eq">(9−4)²/25 + (0)²/9 = 25/25 = 1 ✓</div>
+          <div class="result">✅ (x−4)²/25 + y²/9 = 1</div>
+        </div>
+      </div>
+
+      <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌓</span> Ejercicio 4 — Hipérbola con centro (4,0), vértice (7,0), pendiente asíntotas ±2/3
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <p>Calculamos a por la distancia centro-vértice, y b por la pendiente de la asíntota b/a:</p>
+          <div class="eq">a = 7 − 4 = 3 · b/a = 2/3 → b = 2</div>
+          <p>Verificación sustituyendo el vértice (7,0):</p>
+          <div class="eq">(7−4)²/9 − 0²/4 = 9/9 = 1 ✓</div>
+          <div class="result">✅ (x−4)²/9 − y²/4 = 1</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EJERCICIOS JHENER -->
+    <section id="ej-jhener">
+      <h2>Ejercicios resueltos — Jhener Calvache</h2>
+      <p>En esta sección se resuelven las cónicas partiendo de la ecuación general hacia la forma estándar para identificar sus elementos principales.</p>
+    
+      <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬤</span> Ejercicio 1 — Circunferencia
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <div class="eq">x² + y² - 8x + 12 = 0</div>
+          <p>Completamos el cuadrado para x: (x² - 8x + 16) + y² = -12 + 16</p>
+          <div class="result">✅ (x - 4)² + y² = 4 | Centro (4,0), Radio r=2</div>
+          <img src="circulo_jhener.png" alt="Gráfica Círculo Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+        </div>
+      </div>
+    
+      <div class="exercise-block ex-parabola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌒</span> Ejercicio 2 — Parábola
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <div class="eq">y² + 16x - 64 = 0</div>
+          <p>Despejamos y factorizamos: y² = -16(x - 4)</p>
+          <div class="result">✅ Vértice (4,0) | Abre hacia la izquierda (p = -4)</div>
+          <img src="parabola_jhener.png" alt="Gráfica Parábola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+        </div>
+      </div>
+    
+      <div class="exercise-block ex-elipse" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⬭</span> Ejercicio 3 — Elipse
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <div class="eq">9x² + 4y² - 72x + 108 = 0</div>
+          <p>Tras completar cuadrados y dividir entre 36:</p>
+          <div class="result">✅ (x-4)²/4 + y²/9 = 1 | Centro (4,0), Eje mayor vertical</div>
+          <img src="elipse_jhener.png" alt="Gráfica Elipse Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+        </div>
+      </div>
+    
+      <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
+        <div class="exercise-header">
+          <span>⌓</span> Ejercicio 4 — Hipérbola
+          <span class="chevron">▾</span>
+        </div>
+        <div class="collapsible exercise-body">
+          <div class="eq">16x² - 9y² - 128x + 112 = 0</div>
+          <p>Tras completar cuadrados y dividir entre 144:</p>
+          <div class="result">✅ (x-4)²/9 - y²/16 = 1 | Centro (4,0), Horizontal</div>
+          <img src="hiperbola_jhener.png" alt="Gráfica Hipérbola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- HERRAMIENTAS -->
+    <section id="herramientas">
+      <h2>Herramientas TIC para graficar cónicas</h2>
+      <p>Existen herramientas digitales gratuitas que permiten visualizar cónicas en tiempo real. Son muy útiles para comprobar los resultados de los ejercicios.</p>
+      <div class="tool-cards">
+        <div class="tool-card">
+          <h4>GeoGebra Clásico</h4>
+          <p>Ingresa la ecuación en la barra alfanumérica (ej. <code>x^2/9 + y^2/4 = 1</code>) y la herramienta genera automáticamente la gráfica. Permite usar "deslizadores" para modificar a, b, h, k en tiempo real.</p>
+          <a class="tool-link" href="https://www.geogebra.org/classic?lang=es" target="_blank">→ Abrir GeoGebra</a>
+        </div>
+        <div class="tool-card">
+          <h4>Desmos</h4>
+          <p>Calculadora gráfica en línea muy intuitiva. Escribe la ecuación en la barra izquierda, presiona Enter y la gráfica aparece de inmediato. También soporta deslizadores y zoom.</p>
+          <a class="tool-link" href="https://www.desmos.com/calculator" target="_blank">→ Abrir Desmos</a>
+        </div>
+      </div>
+
+      <h3>Ecuaciones para ingresar en Desmos / GeoGebra</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-family:'Fira Mono',monospace; font-size:0.78rem; margin-top:0.8rem;">
+        <div style="background:var(--blue-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--blue);">Circunferencia:<br>(x-h)^2 + (y-k)^2 = r^2</div>
+        <div style="background:var(--green-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--green);">Parábola:<br>y = (x-h)^2 + k</div>
+        <div style="background:var(--purple-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--purple);">Elipse:<br>(x-h)^2/a^2 + (y-k)^2/b^2 = 1</div>
+        <div style="background:var(--accent-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--accent);">Hipérbola:<br>(x-h)^2/a^2 - (y-k)^2/b^2 = 1</div>
+      </div>
+    </section>
+
+    <!-- REFERENCIAS -->
+    <section id="referencias">
+      <h2>Referencias bibliográficas</h2>
+      <ul class="ref-list">
+        <li>Boyer, Carl B. (2004). <em>History of Analytic Geometry</em>. Dover Publications. ISBN 978-0486438320.</li>
+        <li>Lehmann, Charles H. <em>Geometría Analítica</em>. Editorial Limusa. ISBN 978-968-18-1176-1.</li>
+        <li>Colera Jiménez, José (2007). <em>Matemáticas II, geometría analítica del espacio</em>. Editorial Anaya.</li>
+        <li>Rees, Paul K. (1972). <em>Geometría analítica</em>. Editorial Reverté. ISBN 978-84-291-5110-7.</li>
+        <li>Ruiz Sancho, J. M. (2004). <em>Geometría analítica, Bachillerato</em>. Editorial Anaya.</li>
+        <li>González Urbaneja, P. M. (2004). <em>Los orígenes de la geometría analítica</em>. Fundación Canaria Orotava.</li>
+        <li>Katz, Victor J. (1998). <em>A History of Mathematics: An Introduction</em>. Addison Wesley Longman.</li>
+        <li>GeoGebra Clásico. Herramienta dinámica para modelado y graficación de cónicas.</li>
+        <li>Wikipedia. "Geometría analítica". Enciclopedia libre con revisión comunitaria.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  function toggle(el) {
+    el.classList.toggle('collapsed');
+  }
+</script>
+
+</body>
+</html>
