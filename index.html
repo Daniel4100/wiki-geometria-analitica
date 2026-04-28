@@ -412,6 +412,48 @@
   }
   .tool-link:hover { color: var(--accent-soft); }
 
+  .eq-formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+    font-family: 'Fira Mono', monospace;
+  }
+  .eq-formula-cell {
+    padding: 0.65rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    border: 1px solid var(--border-light);
+  }
+  .eq-formula-cell .eq-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+    opacity: 0.95;
+  }
+  .eq-formula-cell .eq-math {
+    display: block;
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    word-break: break-word;
+  }
+  .eq-formula-cell .eq-math sup {
+    font-size: 0.65em;
+    font-weight: 600;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+    top: -0.4em;
+  }
+  .eq-formula-cell.eq-blue { background: var(--blue-bg); color: var(--blue); }
+  .eq-formula-cell.eq-green { background: var(--green-bg); color: var(--green); }
+  .eq-formula-cell.eq-purple { background: var(--purple-bg); color: var(--purple); }
+  .eq-formula-cell.eq-red { background: var(--accent-bg); color: var(--accent); }
+
   /* REFERENCES */
   .ref-list { list-style: none; }
   .ref-list li {
@@ -446,7 +488,7 @@
     .layout { grid-template-columns: 1fr; }
     aside { display: none; }
     main { padding: 1.2rem; }
-    .conic-grid, .tool-cards { grid-template-columns: 1fr; }
+    .conic-grid, .tool-cards, .eq-formula-grid { grid-template-columns: 1fr; }
     .infobox { float: none; width: 100%; margin: 1rem 0; }
   }
 </style>
@@ -868,7 +910,7 @@
           <div class="eq">x² + y² - 8x + 12 = 0</div>
           <p>Completamos el cuadrado para x: (x² - 8x + 16) + y² = -12 + 16</p>
           <div class="result">✅ (x - 4)² + y² = 4 | Centro (4,0), Radio r=2</div>
-          <img src="circulo_jhener.png" alt="Gráfica Círculo Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+          <img src="public/circulo_jhener.png" alt="Gráfica Círculo Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
     
@@ -881,7 +923,7 @@
           <div class="eq">y² + 16x - 64 = 0</div>
           <p>Despejamos y factorizamos: y² = -16(x - 4)</p>
           <div class="result">✅ Vértice (4,0) | Abre hacia la izquierda (p = -4)</div>
-          <img src="parabola_jhener.png" alt="Gráfica Parábola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+          <img src="public/parabola_jhener.png" alt="Gráfica Parábola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
     
@@ -894,7 +936,7 @@
           <div class="eq">9x² + 4y² - 72x + 108 = 0</div>
           <p>Tras completar cuadrados y dividir entre 36:</p>
           <div class="result">✅ (x-4)²/4 + y²/9 = 1 | Centro (4,0), Eje mayor vertical</div>
-          <img src="elipse_jhener.png" alt="Gráfica Elipse Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+          <img src="public/elipse_jhener.png" alt="Gráfica Elipse Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
     
@@ -907,7 +949,7 @@
           <div class="eq">16x² - 9y² - 128x + 112 = 0</div>
           <p>Tras completar cuadrados y dividir entre 144:</p>
           <div class="result">✅ (x-4)²/9 - y²/16 = 1 | Centro (4,0), Horizontal</div>
-          <img src="hiperbola_jhener.png" alt="Gráfica Hipérbola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
+          <img src="public/hiperbola_jhener.png" alt="Gráfica Hipérbola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
     </section>
@@ -927,9 +969,14 @@
           <p>Calculadora gráfica en línea muy intuitiva. Escribe la ecuación en la barra izquierda, presiona Enter y la gráfica aparece de inmediato. También soporta deslizadores y zoom.</p>
           <a class="tool-link" href="https://www.desmos.com/calculator" target="_blank">→ Abrir Desmos</a>
         </div>
+        <div class="tool-card">
+          <h4>Symbolab</h4>
+          <p>Es una calculadora paso a paso. Se usa ingresando la ecuación general; la herramienta no solo muestra la gráfica, sino que desglosa el proceso analítico de completar el cuadrado.</p>
+          <a class="tool-link" href="https://es.symbolab.com/solver/geometry-calculator" target="_blank">→ Abrir Symbolab</a>
+        </div>
       </div>
 
-      <h3>Ecuaciones para ingresar en Desmos / GeoGebra</h3>
+      <h3>Ecuaciones para ingresar en las herramientas</h3>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-family:'Fira Mono',monospace; font-size:0.78rem; margin-top:0.8rem;">
         <div style="background:var(--blue-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--blue);">Circunferencia:<br>(x-h)^2 + (y-k)^2 = r^2</div>
         <div style="background:var(--green-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--green);">Parábola:<br>y = (x-h)^2 + k</div>
@@ -951,6 +998,7 @@
         <li>Katz, Victor J. (1998). <em>A History of Mathematics: An Introduction</em>. Addison Wesley Longman.</li>
         <li>GeoGebra Clásico. Herramienta dinámica para modelado y graficación de cónicas.</li>
         <li>Wikipedia. "Geometría analítica". Enciclopedia libre con revisión comunitaria.</li>
+        <li>Symbolab. Calculadora paso a paso de secciones cónicas y álgebra. https://es.symbolab.com/</li>
       </ul>
     </section>
 
