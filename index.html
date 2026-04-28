@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,6 +72,27 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
+
+  /* LANG BUTTON */
+  .lang-btn {
+    background: transparent;
+    border: 1px solid rgba(160,144,112,0.6);
+    color: #a09070;
+    padding: 0.22rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: all 0.15s;
+    font-family: 'Source Sans 3', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .lang-btn:hover { border-color: var(--yellow); color: var(--yellow); }
+  .lang-btn.active { border-color: var(--yellow); color: var(--yellow); background: rgba(212,160,23,0.1); }
 
   /* LAYOUT */
   .layout {
@@ -206,7 +227,7 @@
 
   /* SECTIONS */
   section { margin-bottom: 2.5rem; animation: fadeUp 0.4s ease; }
-  
+
   h2 {
     font-family: 'Libre Baskerville', serif;
     font-size: 1.4rem;
@@ -498,68 +519,71 @@
 <header class="site-header">
   <a class="logo" href="#"><span>Wiki</span>Geo</a>
   <span class="header-sep"></span>
-  <span class="header-tag">Fundamentos de Matemáticas · Areandina 2026</span>
+  <span class="header-tag" data-i18n="header-tag">Fundamentos de Matemáticas · Areandina 2026</span>
+  <button class="lang-btn" id="lang-toggle" onclick="toggleLang()" title="Translate to English">
+    🌐 <span id="lang-label">EN</span>
+  </button>
 </header>
 
 <div class="layout">
   <aside>
-    <div class="toc-title">Tabla de contenido</div>
+    <div class="toc-title" data-i18n="toc-title">Tabla de contenido</div>
 
     <div class="toc-section">
-      <div class="toc-section-title">Introducción</div>
+      <div class="toc-section-title" data-i18n="toc-s-intro">Introducción</div>
       <ul class="toc-list">
-        <li><a href="#intro">¿Qué son las cónicas?</a></li>
-        <li><a href="#resumen">Resumen de formas</a></li>
+        <li><a href="#intro" data-i18n="toc-what-conics">¿Qué son las cónicas?</a></li>
+        <li><a href="#resumen" data-i18n="toc-overview">Resumen de formas</a></li>
       </ul>
     </div>
 
     <div class="toc-section">
-      <div class="toc-section-title">Las cuatro cónicas</div>
+      <div class="toc-section-title" data-i18n="toc-s-conics">Las cuatro cónicas</div>
       <ul class="toc-list">
-        <li><a href="#circunferencia">Circunferencia</a></li>
-        <li><a href="#parabola">Parábola</a></li>
-        <li><a href="#elipse">Elipse</a></li>
-        <li><a href="#hiperbola">Hipérbola</a></li>
+        <li><a href="#circunferencia" data-i18n="toc-circle">Circunferencia</a></li>
+        <li><a href="#parabola" data-i18n="toc-parabola">Parábola</a></li>
+        <li><a href="#elipse" data-i18n="toc-ellipse">Elipse</a></li>
+        <li><a href="#hiperbola" data-i18n="toc-hyperbola">Hipérbola</a></li>
       </ul>
     </div>
 
     <div class="toc-section">
-      <div class="toc-section-title">Ejercicios resueltos</div>
+      <div class="toc-section-title" data-i18n="toc-s-exercises">Ejercicios resueltos</div>
       <ul class="toc-list">
         <li><a href="#ej-kevin">Kevin Gómez</a>
           <ul class="toc-list">
-            <li class="sub"><a href="#ej-kevin">· Completar cuadrado</a></li>
+            <li class="sub"><a href="#ej-kevin" data-i18n="toc-kevin-sub">· Completar cuadrado</a></li>
           </ul>
         </li>
         <li><a href="#ej-jonathan">Jonathan Díaz</a>
           <ul class="toc-list">
-            <li class="sub"><a href="#ej-jonathan">· Datos geométricos</a></li>
+            <li class="sub"><a href="#ej-jonathan" data-i18n="toc-jonathan-sub">· Datos geométricos</a></li>
           </ul>
         </li>
         <li><a href="#ej-frank">Franklin Angulo Jimenez</a>
           <ul class="toc-list">
-            <li class="sub"><a href="#ej-frank">· Completar cuadrado</a></li>
+            <li class="sub"><a href="#ej-frank" data-i18n="toc-frank-sub">· Completar cuadrado</a></li>
           </ul>
         </li>
         <li><a href="#ej-jhener">Jhener Calvache</a>
           <ul class="toc-list">
-            <li class="sub"><a href="#ej-jhener">· Completar cuadrado</a></li>
+            <li class="sub"><a href="#ej-jhener" data-i18n="toc-jhener-sub">· Completar cuadrado</a></li>
           </ul>
         </li>
       </ul>
     </div>
 
     <div class="toc-section">
-      <div class="toc-section-title">Herramientas TIC</div>
+      <div class="toc-section-title" data-i18n="toc-s-tools">Herramientas TIC</div>
       <ul class="toc-list">
-        <li><a href="#herramientas">GeoGebra y Desmos</a></li>
+        <li><a href="#herramientas" data-i18n="toc-tools-link">GeoGebra y Desmos</a></li>
       </ul>
     </div>
 
     <div class="toc-section">
-      <div class="toc-section-title">Referencias</div>
+      <div class="toc-section-title" data-i18n="toc-s-refs">Referencias</div>
       <ul class="toc-list">
-        <li><a href="#referencias">Bibliografía</a></li>
+        <li><a href="#referencias" data-i18n="toc-bibliography">Bibliografía</a></li>
       </ul>
     </div>
   </aside>
@@ -567,67 +591,67 @@
   <main>
     <!-- ARTICLE HEADER -->
     <div class="article-header">
-      <div class="article-label">Geometría Analítica · Eje 4 — Teoría de las Cónicas</div>
-      <h1 class="article-title">Curvas Cónicas y su Geometría</h1>
+      <div class="article-label" data-i18n="article-label">Geometría Analítica · Eje 4 — Teoría de las Cónicas</div>
+      <h1 class="article-title" data-i18n="article-title">Curvas Cónicas y su Geometría</h1>
       <div class="article-meta">
         <span>Angulo Franklin · Calvache Jhener · Díaz Jonathan · Gómez Kevin</span>
-        <span>Ing. de Software, Fundación Universitaria Areandina</span>
-        <span>27 de abril de 2026</span>
+        <span data-i18n="article-institution">Ing. de Software, Fundación Universitaria Areandina</span>
+        <span data-i18n="article-date">27 de abril de 2026</span>
       </div>
     </div>
 
     <!-- INTRO + INFOBOX -->
     <section id="intro" class="clearfix">
       <div class="infobox">
-        <div class="infobox-title">Ficha de las Cónicas</div>
+        <div class="infobox-title" data-i18n="ib-title">Ficha de las Cónicas</div>
         <table>
-          <tr><td>Área</td><td>Geometría Analítica</td></tr>
-          <tr><td>Tipos</td><td>Circunferencia, Parábola, Elipse, Hipérbola</td></tr>
-          <tr><td>Origen</td><td>Sección de un cono con un plano</td></tr>
-          <tr><td>Herramienta</td><td>GeoGebra, Desmos</td></tr>
-          <tr><td>Técnica clave</td><td>Completar el cuadrado</td></tr>
-          <tr><td>Forma general</td><td>Ax²+Bxy+Cy²+Dx+Ey+F=0</td></tr>
+          <tr><td data-i18n="ib-area-k">Área</td><td data-i18n="ib-area-v">Geometría Analítica</td></tr>
+          <tr><td data-i18n="ib-types-k">Tipos</td><td data-i18n="ib-types-v">Circunferencia, Parábola, Elipse, Hipérbola</td></tr>
+          <tr><td data-i18n="ib-origin-k">Origen</td><td data-i18n="ib-origin-v">Sección de un cono con un plano</td></tr>
+          <tr><td data-i18n="ib-tool-k">Herramienta</td><td>GeoGebra, Desmos</td></tr>
+          <tr><td data-i18n="ib-technique-k">Técnica clave</td><td data-i18n="ib-technique-v">Completar el cuadrado</td></tr>
+          <tr><td data-i18n="ib-general-k">Forma general</td><td>Ax²+Bxy+Cy²+Dx+Ey+F=0</td></tr>
         </table>
       </div>
 
-      <h2>¿Qué son las curvas cónicas?</h2>
-      <p>Las <strong>cónicas</strong> son curvas que se obtienen al cortar un cono doble con un plano. Dependiendo del ángulo de corte, obtenemos cuatro figuras distintas: la <em>circunferencia</em>, la <em>elipse</em>, la <em>parábola</em> y la <em>hipérbola</em>.</p>
-      <p>En geometría analítica, cada una tiene una ecuación característica que relaciona las coordenadas <strong>x</strong> e <strong>y</strong> de todos sus puntos. La clave para trabajar con ellas es aprender a identificarlas y a transformar su ecuación de la <em>forma general</em> a la <em>forma estándar</em>.</p>
+      <h2 data-i18n="intro-h2">¿Qué son las curvas cónicas?</h2>
+      <p data-i18n-html="intro-p1">Las <strong>cónicas</strong> son curvas que se obtienen al cortar un cono doble con un plano. Dependiendo del ángulo de corte, obtenemos cuatro figuras distintas: la <em>circunferencia</em>, la <em>elipse</em>, la <em>parábola</em> y la <em>hipérbola</em>.</p>
+      <p data-i18n-html="intro-p2">En geometría analítica, cada una tiene una ecuación característica que relaciona las coordenadas <strong>x</strong> e <strong>y</strong> de todos sus puntos. La clave para trabajar con ellas es aprender a identificarlas y a transformar su ecuación de la <em>forma general</em> a la <em>forma estándar</em>.</p>
 
-      <div class="note-box">
+      <div class="note-box" data-i18n-html="intro-note">
         <strong>💡 Consejo clave:</strong> La técnica más importante para transformar ecuaciones cónicas se llama <em>"completar el cuadrado"</em>. La estudiaremos paso a paso en los ejercicios resueltos.
       </div>
     </section>
 
     <!-- RESUMEN DE FORMAS -->
     <section id="resumen">
-      <h2>Las cuatro cónicas de un vistazo</h2>
+      <h2 data-i18n="resumen-h2">Las cuatro cónicas de un vistazo</h2>
       <div class="conic-grid">
         <div class="conic-card card-circunferencia">
-          <div class="conic-card-header"><span class="icon">⬤</span> Circunferencia</div>
+          <div class="conic-card-header"><span class="icon">⬤</span> <span data-i18n="card-circle-name">Circunferencia</span></div>
           <div class="conic-card-body">
-            <p>Caso especial de elipse donde ambos ejes son iguales. Todos los puntos equidistan del centro.</p>
+            <p data-i18n="card-circle-p">Caso especial de elipse donde ambos ejes son iguales. Todos los puntos equidistan del centro.</p>
             <span class="formula-pill">(x−h)² + (y−k)² = r²</span>
           </div>
         </div>
         <div class="conic-card card-parabola">
-          <div class="conic-card-header"><span class="icon">⌒</span> Parábola</div>
+          <div class="conic-card-header"><span class="icon">⌒</span> <span data-i18n="card-parabola-name">Parábola</span></div>
           <div class="conic-card-body">
-            <p>Equidista de un punto fijo (foco) y una recta fija (directriz). Abre hacia un lado.</p>
+            <p data-i18n="card-parabola-p">Equidista de un punto fijo (foco) y una recta fija (directriz). Abre hacia un lado.</p>
             <span class="formula-pill">(y−k)² = 4p(x−h)</span>
           </div>
         </div>
         <div class="conic-card card-elipse">
-          <div class="conic-card-header"><span class="icon">⬭</span> Elipse</div>
+          <div class="conic-card-header"><span class="icon">⬭</span> <span data-i18n="card-ellipse-name">Elipse</span></div>
           <div class="conic-card-body">
-            <p>La <em>suma</em> de distancias a dos focos es constante. Tiene eje mayor y eje menor.</p>
+            <p data-i18n-html="card-ellipse-p">La <em>suma</em> de distancias a dos focos es constante. Tiene eje mayor y eje menor.</p>
             <span class="formula-pill">(x−h)²/a² + (y−k)²/b² = 1</span>
           </div>
         </div>
         <div class="conic-card card-hiperbola">
-          <div class="conic-card-header"><span class="icon">⌓</span> Hipérbola</div>
+          <div class="conic-card-header"><span class="icon">⌓</span> <span data-i18n="card-hyperbola-name">Hipérbola</span></div>
           <div class="conic-card-body">
-            <p>La <em>diferencia</em> de distancias a dos focos es constante. Tiene dos ramas y asíntotas.</p>
+            <p data-i18n-html="card-hyperbola-p">La <em>diferencia</em> de distancias a dos focos es constante. Tiene dos ramas y asíntotas.</p>
             <span class="formula-pill">(x−h)²/a² − (y−k)²/b² = 1</span>
           </div>
         </div>
@@ -636,270 +660,270 @@
 
     <!-- CIRCUNFERENCIA -->
     <section id="circunferencia">
-      <h2>Circunferencia (El Círculo)</h2>
-      <p>Es el <strong>lugar geométrico</strong> de todos los puntos que están a la misma distancia <em>r</em> (radio) de un punto fijo llamado <strong>centro (h, k)</strong>. Es un caso particular de la elipse donde los dos ejes son iguales.</p>
-      <h3>Forma estándar</h3>
-      <p>Su ecuación canónica es:</p>
+      <h2 data-i18n="circle-h2">Circunferencia (El Círculo)</h2>
+      <p data-i18n-html="circle-p1">Es el <strong>lugar geométrico</strong> de todos los puntos que están a la misma distancia <em>r</em> (radio) de un punto fijo llamado <strong>centro (h, k)</strong>. Es un caso particular de la elipse donde los dos ejes son iguales.</p>
+      <h3 data-i18n="circle-h3">Forma estándar</h3>
+      <p data-i18n="circle-p2">Su ecuación canónica es:</p>
       <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--blue-bg); border:1px solid #c5d8f0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--blue);">
         (x − h)² + (y − k)² = r²
       </div>
-      <p>Donde <code>(h, k)</code> es el centro y <code>r</code> es el radio. Cuando el centro está en el origen, se simplifica a <code>x² + y² = r²</code>.</p>
+      <p data-i18n-html="circle-p3">Donde <code>(h, k)</code> es el centro y <code>r</code> es el radio. Cuando el centro está en el origen, se simplifica a <code>x² + y² = r²</code>.</p>
     </section>
 
     <!-- PARÁBOLA -->
     <section id="parabola">
-      <h2>Parábola</h2>
-      <p>Es el lugar geométrico de los puntos que <strong>equidistan</strong> de un punto fijo llamado <em>foco</em> y de una recta fija llamada <em>directriz</em>. Su ecuación general más conocida es <code>y = ax² + bx + c</code>.</p>
-      <h3>Formas estándar</h3>
-      <p>Dependiendo de la orientación de apertura:</p>
+      <h2 data-i18n="parabola-h2">Parábola</h2>
+      <p data-i18n-html="parabola-p1">Es el lugar geométrico de los puntos que <strong>equidistan</strong> de un punto fijo llamado <em>foco</em> y de una recta fija llamada <em>directriz</em>. Su ecuación general más conocida es <code>y = ax² + bx + c</code>.</p>
+      <h3 data-i18n="parabola-h3">Formas estándar</h3>
+      <p data-i18n="parabola-p2">Dependiendo de la orientación de apertura:</p>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin:0.8rem 0; font-family:'Fira Mono',monospace; font-size:0.82rem;">
         <div style="background:var(--green-bg); border:1px solid #b5e0c8; border-radius:4px; padding:0.6rem; color:var(--green);">
-          Horizontal:<br><strong>(y−k)² = 4p(x−h)</strong>
+          <span data-i18n="parabola-horizontal">Horizontal:</span><br><strong>(y−k)² = 4p(x−h)</strong>
         </div>
         <div style="background:var(--green-bg); border:1px solid #b5e0c8; border-radius:4px; padding:0.6rem; color:var(--green);">
-          Vertical:<br><strong>(x−h)² = 4p(y−k)</strong>
+          <span data-i18n="parabola-vertical">Vertical:</span><br><strong>(x−h)² = 4p(y−k)</strong>
         </div>
       </div>
-      <p>El <strong>vértice</strong> es <code>(h, k)</code> y <strong>p</strong> determina la distancia al foco. Si p > 0 abre a la derecha/arriba; si p < 0 abre a la izquierda/abajo.</p>
+      <p data-i18n-html="parabola-p3">El <strong>vértice</strong> es <code>(h, k)</code> y <strong>p</strong> determina la distancia al foco. Si p > 0 abre a la derecha/arriba; si p &lt; 0 abre a la izquierda/abajo.</p>
     </section>
 
     <!-- ELIPSE -->
     <section id="elipse">
-      <h2>Elipse</h2>
-      <p>Es el lugar geométrico de los puntos tal que la <strong>suma</strong> de sus distancias a dos puntos fijos llamados <em>focos</em> es siempre igual a una constante <strong>2a</strong>. Sus elementos son: centro (h,k), eje mayor (2a), eje menor (2b) y distancia focal (2c).</p>
-      <h3>Forma estándar</h3>
+      <h2 data-i18n="ellipse-h2">Elipse</h2>
+      <p data-i18n-html="ellipse-p1">Es el lugar geométrico de los puntos tal que la <strong>suma</strong> de sus distancias a dos puntos fijos llamados <em>focos</em> es siempre igual a una constante <strong>2a</strong>. Sus elementos son: centro (h,k), eje mayor (2a), eje menor (2b) y distancia focal (2c).</p>
+      <h3 data-i18n="ellipse-h3">Forma estándar</h3>
       <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--purple-bg); border:1px solid #d0b8f0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--purple);">
         (x−h)²/a² + (y−k)²/b² = 1
       </div>
-      <p>Relación fundamental: <code>c² = a² − b²</code>. Si <strong>a² > b²</strong>, el eje mayor es horizontal; si <strong>b² > a²</strong>, el eje mayor es vertical.</p>
+      <p data-i18n-html="ellipse-p2">Relación fundamental: <code>c² = a² − b²</code>. Si <strong>a² > b²</strong>, el eje mayor es horizontal; si <strong>b² > a²</strong>, el eje mayor es vertical.</p>
     </section>
 
     <!-- HIPÉRBOLA -->
     <section id="hiperbola">
-      <h2>Hipérbola</h2>
-      <p>Es el lugar geométrico de los puntos tal que la <strong>diferencia</strong> (en valor absoluto) de sus distancias a dos focos es constante e igual a <strong>2a</strong>. Se distingue visualmente por tener dos ramas separadas y unas líneas guía llamadas <em>asíntotas</em>.</p>
-      <h3>Forma estándar</h3>
+      <h2 data-i18n="hyperbola-h2">Hipérbola</h2>
+      <p data-i18n-html="hyperbola-p1">Es el lugar geométrico de los puntos tal que la <strong>diferencia</strong> (en valor absoluto) de sus distancias a dos focos es constante e igual a <strong>2a</strong>. Se distingue visualmente por tener dos ramas separadas y unas líneas guía llamadas <em>asíntotas</em>.</p>
+      <h3 data-i18n="hyperbola-h3">Forma estándar</h3>
       <div style="text-align:center; font-family:'Fira Mono',monospace; font-size:1rem; background:var(--accent-bg); border:1px solid #f0c0b0; border-radius:6px; padding:0.8rem; margin:0.8rem 0; color:var(--accent);">
         (x−h)²/a² − (y−k)²/b² = 1
       </div>
-      <p>Las <strong>asíntotas</strong> son las rectas <code>y − k = ±(b/a)(x − h)</code>. La hipérbola se aproxima a ellas infinitamente sin tocarlas nunca.</p>
+      <p data-i18n-html="hyperbola-p2">Las <strong>asíntotas</strong> son las rectas <code>y − k = ±(b/a)(x − h)</code>. La hipérbola se aproxima a ellas infinitamente sin tocarlas nunca.</p>
     </section>
 
     <!-- EJERCICIOS KEVIN -->
     <section id="ej-kevin">
-      <h2>Ejercicios resueltos — Kevin Gómez</h2>
-      <p>Estos ejercicios parten de ecuaciones en <em>forma general</em> y las transforman a <em>forma estándar</em> mediante la técnica de <strong>completar el cuadrado</strong>.</p>
+      <h2 data-i18n="kevin-h2">Ejercicios resueltos — Kevin Gómez</h2>
+      <p data-i18n-html="kevin-p1">Estos ejercicios parten de ecuaciones en <em>forma general</em> y las transforman a <em>forma estándar</em> mediante la técnica de <strong>completar el cuadrado</strong>.</p>
 
-      <div class="note-box">
+      <div class="note-box" data-i18n-html="kevin-note">
         <strong>📐 ¿Cómo completar el cuadrado?</strong> Tomamos el coeficiente del término lineal, lo dividimos entre 2 y lo elevamos al cuadrado. Ese número se suma a <em>ambos lados</em> de la ecuación para mantener la igualdad.
       </div>
 
       <!-- Ejercicio 1 -->
       <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬤</span> Ejercicio 1 — Circunferencia
+          <span>⬤</span> <span data-i18n="kevin-ex1-header">Ejercicio 1 — Circunferencia</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p><strong>Ecuación general:</strong></p>
+          <p><strong data-i18n="eq-label">Ecuación general:</strong></p>
           <div class="eq">x² + y² + 4x − 6y + 9 = 0</div>
           <div class="steps-container">
             <div class="step">
               <div class="step-num">1</div>
               <div class="step-content">
-                <div class="step-title">Agrupamos x e y y pasamos la constante</div>
+                <div class="step-title" data-i18n="kevin-ex1-s1-title">Agrupamos x e y y pasamos la constante</div>
                 <div class="step-formula">(x² + 4x) + (y² − 6y) = −9</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">2</div>
               <div class="step-content">
-                <div class="step-title">Completamos el cuadrado</div>
-                <p class="step-text">Para x: (4÷2)² = 4 · Para y: (6÷2)² = 9. Se suman a ambos lados.</p>
+                <div class="step-title" data-i18n="kevin-ex1-s2-title">Completamos el cuadrado</div>
+                <p class="step-text" data-i18n="kevin-ex1-s2-text">Para x: (4÷2)² = 4 · Para y: (6÷2)² = 9. Se suman a ambos lados.</p>
                 <div class="step-formula">(x² + 4x + 4) + (y² − 6y + 9) = −9 + 4 + 9</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">3</div>
               <div class="step-content">
-                <div class="step-title">Forma estándar final</div>
+                <div class="step-title" data-i18n="kevin-ex1-s3-title">Forma estándar final</div>
                 <div class="step-formula">(x + 2)² + (y − 3)² = 4</div>
               </div>
             </div>
           </div>
-          <div class="result">✅ Centro (−2, 3) · Radio r = 2</div>
+          <div class="result" data-i18n="kevin-ex1-result">✅ Centro (−2, 3) · Radio r = 2</div>
         </div>
       </div>
 
       <!-- Ejercicio 2 -->
       <div class="exercise-block ex-parabola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌒</span> Ejercicio 2 — Parábola
+          <span>⌒</span> <span data-i18n="kevin-ex2-header">Ejercicio 2 — Parábola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p><strong>Ecuación general:</strong></p>
+          <p><strong data-i18n="eq-label">Ecuación general:</strong></p>
           <div class="eq">y² − 6y − 4x + 1 = 0</div>
           <div class="steps-container">
             <div class="step">
               <div class="step-num">1</div>
               <div class="step-content">
-                <div class="step-title">Agrupamos y, pasamos x al otro lado</div>
+                <div class="step-title" data-i18n="kevin-ex2-s1-title">Agrupamos y, pasamos x al otro lado</div>
                 <div class="step-formula">(y² − 6y) = 4x − 1</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">2</div>
               <div class="step-content">
-                <div class="step-title">Completamos el cuadrado en y</div>
-                <p class="step-text">Para y: (6÷2)² = 9. Sumamos 9 a ambos lados.</p>
+                <div class="step-title" data-i18n="kevin-ex2-s2-title">Completamos el cuadrado en y</div>
+                <p class="step-text" data-i18n="kevin-ex2-s2-text">Para y: (6÷2)² = 9. Sumamos 9 a ambos lados.</p>
                 <div class="step-formula">(y² − 6y + 9) = 4x − 1 + 9</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">3</div>
               <div class="step-content">
-                <div class="step-title">Simplificamos y factorizamos</div>
+                <div class="step-title" data-i18n="kevin-ex2-s3-title">Simplificamos y factorizamos</div>
                 <div class="step-formula">(y − 3)² = 4(x + 2)</div>
               </div>
             </div>
           </div>
-          <div class="result">✅ Vértice (−2, 3) · Abre hacia la derecha (p > 0)</div>
+          <div class="result" data-i18n="kevin-ex2-result">✅ Vértice (−2, 3) · Abre hacia la derecha (p > 0)</div>
         </div>
       </div>
 
       <!-- Ejercicio 3 -->
       <div class="exercise-block ex-elipse" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬭</span> Ejercicio 3 — Elipse
+          <span>⬭</span> <span data-i18n="kevin-ex3-header">Ejercicio 3 — Elipse</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p><strong>Ecuación general:</strong></p>
+          <p><strong data-i18n="eq-label">Ecuación general:</strong></p>
           <div class="eq">25x² + 16y² + 100x − 96y − 156 = 0</div>
           <div class="steps-container">
             <div class="step">
               <div class="step-num">1</div>
               <div class="step-content">
-                <div class="step-title">Agrupamos y factorizamos coeficientes</div>
+                <div class="step-title" data-i18n="kevin-ex3-s1-title">Agrupamos y factorizamos coeficientes</div>
                 <div class="step-formula">25(x² + 4x) + 16(y² − 6y) = 156</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">2</div>
               <div class="step-content">
-                <div class="step-title">Completamos el cuadrado (¡ojo con los coeficientes!)</div>
-                <p class="step-text">Lo que agregamos dentro del paréntesis se multiplica por el factor de afuera: 25×4 = 100 y 16×9 = 144.</p>
+                <div class="step-title" data-i18n="kevin-ex3-s2-title">Completamos el cuadrado (¡ojo con los coeficientes!)</div>
+                <p class="step-text" data-i18n="kevin-ex3-s2-text">Lo que agregamos dentro del paréntesis se multiplica por el factor de afuera: 25×4 = 100 y 16×9 = 144.</p>
                 <div class="step-formula">25(x² + 4x + 4) + 16(y² − 6y + 9) = 156 + 100 + 144</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">3</div>
               <div class="step-content">
-                <div class="step-title">Simplificamos y dividimos entre 400</div>
+                <div class="step-title" data-i18n="kevin-ex3-s3-title">Simplificamos y dividimos entre 400</div>
                 <div class="step-formula">(x + 2)²/16 + (y − 3)²/25 = 1</div>
               </div>
             </div>
           </div>
-          <div class="result">✅ Centro (−2, 3) · a² = 25 (eje mayor vertical) · b² = 16</div>
+          <div class="result" data-i18n="kevin-ex3-result">✅ Centro (−2, 3) · a² = 25 (eje mayor vertical) · b² = 16</div>
         </div>
       </div>
 
       <!-- Ejercicio 4 -->
       <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌓</span> Ejercicio 4 — Hipérbola
+          <span>⌓</span> <span data-i18n="kevin-ex4-header">Ejercicio 4 — Hipérbola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p><strong>Ecuación general:</strong></p>
+          <p><strong data-i18n="eq-label">Ecuación general:</strong></p>
           <div class="eq">9x² − 16y² + 36x + 96y − 252 = 0</div>
           <div class="steps-container">
             <div class="step">
               <div class="step-num">1</div>
               <div class="step-content">
-                <div class="step-title">Agrupamos y factorizamos (¡cuidado con el signo negativo!)</div>
+                <div class="step-title" data-i18n="kevin-ex4-s1-title">Agrupamos y factorizamos (¡cuidado con el signo negativo!)</div>
                 <div class="step-formula">9(x² + 4x) − 16(y² − 6y) = 252</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">2</div>
               <div class="step-content">
-                <div class="step-title">Completamos el cuadrado</div>
-                <p class="step-text">El término de y se <em>resta</em> por el −16 de afuera: 252 + 36 − 144 = 144.</p>
+                <div class="step-title" data-i18n="kevin-ex4-s2-title">Completamos el cuadrado</div>
+                <p class="step-text" data-i18n-html="kevin-ex4-s2-text">El término de y se <em>resta</em> por el −16 de afuera: 252 + 36 − 144 = 144.</p>
                 <div class="step-formula">9(x + 2)² − 16(y − 3)² = 144</div>
               </div>
             </div>
             <div class="step">
               <div class="step-num">3</div>
               <div class="step-content">
-                <div class="step-title">Dividimos todo entre 144</div>
+                <div class="step-title" data-i18n="kevin-ex4-s3-title">Dividimos todo entre 144</div>
                 <div class="step-formula">(x + 2)²/16 − (y − 3)²/9 = 1</div>
               </div>
             </div>
           </div>
-          <div class="result">✅ Centro (−2, 3) · Abre horizontalmente · a² = 16 · b² = 9</div>
+          <div class="result" data-i18n="kevin-ex4-result">✅ Centro (−2, 3) · Abre horizontalmente · a² = 16 · b² = 9</div>
         </div>
       </div>
     </section>
 
     <!-- EJERCICIOS JONATHAN -->
     <section id="ej-jonathan">
-      <h2>Ejercicios resueltos — Jonathan Díaz</h2>
-      <p>Estos ejercicios parten de <em>datos geométricos</em> (centros, vértices, puntos) para construir la ecuación de la cónica.</p>
+      <h2 data-i18n="jonathan-h2">Ejercicios resueltos — Jonathan Díaz</h2>
+      <p data-i18n-html="jonathan-p1">Estos ejercicios parten de <em>datos geométricos</em> (centros, vértices, puntos) para construir la ecuación de la cónica.</p>
 
       <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬤</span> Ejercicio 1 — Circunferencia con centro (4,0) por el punto (7,4)
+          <span>⬤</span> <span data-i18n="jonathan-ex1-header">Ejercicio 1 — Circunferencia con centro (4,0) por el punto (7,4)</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p>Calculamos el radio usando la fórmula de distancia entre el centro y el punto dado:</p>
+          <p data-i18n="jonathan-ex1-p1">Calculamos el radio usando la fórmula de distancia entre el centro y el punto dado:</p>
           <div class="eq">r² = (7 − 4)² + (4 − 0)² = 9 + 16 = 25 → r = 5</div>
-          <div class="result">✅ (x − 4)² + y² = 25</div>
+          <div class="result" data-i18n="jonathan-ex1-result">✅ (x − 4)² + y² = 25</div>
           <img src="public/jonathan_circulo.jpeg" alt="Gráfica Círculo Jonathan" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-parabola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌒</span> Ejercicio 2 — Parábola con vértice (4,0) por el punto (6,4)
+          <span>⌒</span> <span data-i18n="jonathan-ex2-header">Ejercicio 2 — Parábola con vértice (4,0) por el punto (6,4)</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p>Sustituimos el punto en la forma estándar para encontrar p:</p>
+          <p data-i18n="jonathan-ex2-p1">Sustituimos el punto en la forma estándar para encontrar p:</p>
           <div class="eq">4² = 4p(6 − 4) → 16 = 8p → p = 2</div>
-          <div class="result">✅ y² = 8(x − 4)</div>
+          <div class="result" data-i18n="jonathan-ex2-result">✅ y² = 8(x − 4)</div>
           <img src="public/jonathan_parabola.jpeg" alt="Gráfica Parábola Jonathan" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-elipse" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬭</span> Ejercicio 3 — Elipse con centro (4,0), vértice (9,0), co-vértice (4,3)
+          <span>⬭</span> <span data-i18n="jonathan-ex3-header">Ejercicio 3 — Elipse con centro (4,0), vértice (9,0), co-vértice (4,3)</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p>Calculamos a y b midiendo las distancias del centro a los vértices:</p>
+          <p data-i18n="jonathan-ex3-p1">Calculamos a y b midiendo las distancias del centro a los vértices:</p>
           <div class="eq">a = 9 − 4 = 5 · b = 3</div>
-          <p>Verificación: sustituyendo el vértice (9,0) debe dar 1.</p>
+          <p data-i18n="jonathan-ex3-p2">Verificación: sustituyendo el vértice (9,0) debe dar 1.</p>
           <div class="eq">(9−4)²/25 + (0)²/9 = 25/25 = 1 ✓</div>
-          <div class="result">✅ (x−4)²/25 + y²/9 = 1</div>
+          <div class="result" data-i18n="jonathan-ex3-result">✅ (x−4)²/25 + y²/9 = 1</div>
           <img src="public/jonathan_elipse.jpeg" alt="Gráfica Elipse Jonathan" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌓</span> Ejercicio 4 — Hipérbola con centro (4,0), vértice (7,0), pendiente asíntotas ±2/3
+          <span>⌓</span> <span data-i18n="jonathan-ex4-header">Ejercicio 4 — Hipérbola con centro (4,0), vértice (7,0), pendiente asíntotas ±2/3</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
-          <p>Calculamos a por la distancia centro-vértice, y b por la pendiente de la asíntota b/a:</p>
+          <p data-i18n="jonathan-ex4-p1">Calculamos a por la distancia centro-vértice, y b por la pendiente de la asíntota b/a:</p>
           <div class="eq">a = 7 − 4 = 3 · b/a = 2/3 → b = 2</div>
-          <p>Verificación sustituyendo el vértice (7,0):</p>
+          <p data-i18n="jonathan-ex4-p2">Verificación sustituyendo el vértice (7,0):</p>
           <div class="eq">(7−4)²/9 − 0²/4 = 9/9 = 1 ✓</div>
-          <div class="result">✅ (x−4)²/9 − y²/4 = 1</div>
+          <div class="result" data-i18n="jonathan-ex4-result">✅ (x−4)²/9 − y²/4 = 1</div>
           <img src="public/jonathan_hiperbola.jpeg" alt="Gráfica Hipérbola Jonathan" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
@@ -907,61 +931,61 @@
 
     <!-- EJERCICIOS FRANK -->
     <section id="ej-frank">
-      <h2>Ejercicios resueltos — Franklin Angulo Jimenez</h2>
-      <p>En esta sección se transforman ecuaciones en forma general a su forma estándar usando completar el cuadrado, para identificar centro, vértice y parámetros principales.</p>
+      <h2 data-i18n="frank-h2">Ejercicios resueltos — Franklin Angulo Jimenez</h2>
+      <p data-i18n="frank-p1">En esta sección se transforman ecuaciones en forma general a su forma estándar usando completar el cuadrado, para identificar centro, vértice y parámetros principales.</p>
 
       <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬤</span> Ejercicio 1 — Circunferencia
+          <span>⬤</span> <span data-i18n="frank-ex1-header">Ejercicio 1 — Circunferencia</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">x² + y² - 2x - 2y - 7 = 0</div>
-          <p>Paso 1: (x² - 2x) + (y² - 2y) = 7</p>
-          <p>Paso 2: (x² - 2x + 1) + (y² - 2y + 1) = 7 + 1 + 1</p>
-          <div class="result">✅ (x - 1)² + (y - 1)² = 9 | Centro (1,1), Radio r=3</div>
+          <p data-i18n="frank-ex1-s1">Paso 1: (x² - 2x) + (y² - 2y) = 7</p>
+          <p data-i18n="frank-ex1-s2">Paso 2: (x² - 2x + 1) + (y² - 2y + 1) = 7 + 1 + 1</p>
+          <div class="result" data-i18n="frank-ex1-result">✅ (x - 1)² + (y - 1)² = 9 | Centro (1,1), Radio r=3</div>
           <img src="public/frank_circulo.png" alt="Gráfica Circunferencia Franklin Angulo" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-parabola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌒</span> Ejercicio 2 — Parábola
+          <span>⌒</span> <span data-i18n="frank-ex2-header">Ejercicio 2 — Parábola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">x² - 2x - 8y + 9 = 0</div>
-          <p>Paso 1: (x² - 2x) = 8y - 9</p>
-          <p>Paso 2: (x² - 2x + 1) = 8y - 9 + 1</p>
-          <div class="result">✅ (x - 1)² = 8(y - 1) | Vértice (1,1), abre hacia arriba, p=2</div>
+          <p data-i18n="frank-ex2-s1">Paso 1: (x² - 2x) = 8y - 9</p>
+          <p data-i18n="frank-ex2-s2">Paso 2: (x² - 2x + 1) = 8y - 9 + 1</p>
+          <div class="result" data-i18n="frank-ex2-result">✅ (x - 1)² = 8(y - 1) | Vértice (1,1), abre hacia arriba, p=2</div>
           <img src="public/frank_parabola.png" alt="Gráfica Parábola Franklin Angulo" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-elipse" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬭</span> Ejercicio 3 — Elipse
+          <span>⬭</span> <span data-i18n="frank-ex3-header">Ejercicio 3 — Elipse</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">4x² + 9y² - 8x - 18y - 23 = 0</div>
-          <p>Paso 1: 4(x² - 2x) + 9(y² - 2y) = 23</p>
-          <p>Paso 2: 4(x² - 2x + 1) + 9(y² - 2y + 1) = 23 + 4 + 9</p>
-          <div class="result">✅ (x - 1)²/9 + (y - 1)²/4 = 1 | Centro (1,1), a=3, b=2</div>
+          <p data-i18n="frank-ex3-s1">Paso 1: 4(x² - 2x) + 9(y² - 2y) = 23</p>
+          <p data-i18n="frank-ex3-s2">Paso 2: 4(x² - 2x + 1) + 9(y² - 2y + 1) = 23 + 4 + 9</p>
+          <div class="result" data-i18n="frank-ex3-result">✅ (x - 1)²/9 + (y - 1)²/4 = 1 | Centro (1,1), a=3, b=2</div>
           <img src="public/frank_elipse.png" alt="Gráfica Elipse Franklin Angulo" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
 
       <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌓</span> Ejercicio 4 — Hipérbola
+          <span>⌓</span> <span data-i18n="frank-ex4-header">Ejercicio 4 — Hipérbola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">x² - y² - 2x + 2y - 4 = 0</div>
-          <p>Paso 1: (x² - 2x) - (y² - 2y) = 4</p>
-          <p>Paso 2: (x² - 2x + 1) - (y² - 2y + 1) = 4 + 1 - 1</p>
-          <div class="result">✅ (x - 1)²/4 - (y - 1)²/4 = 1 | Centro (1,1), a=2, b=2</div>
+          <p data-i18n="frank-ex4-s1">Paso 1: (x² - 2x) - (y² - 2y) = 4</p>
+          <p data-i18n="frank-ex4-s2">Paso 2: (x² - 2x + 1) - (y² - 2y + 1) = 4 + 1 - 1</p>
+          <div class="result" data-i18n="frank-ex4-result">✅ (x - 1)²/4 - (y - 1)²/4 = 1 | Centro (1,1), a=2, b=2</div>
           <img src="public/frank_hiperbola.png" alt="Gráfica Hipérbola Franklin Angulo" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
@@ -969,57 +993,57 @@
 
     <!-- EJERCICIOS JHENER -->
     <section id="ej-jhener">
-      <h2>Ejercicios resueltos — Jhener Calvache</h2>
-      <p>En esta sección se resuelven las cónicas partiendo de la ecuación general hacia la forma estándar para identificar sus elementos principales.</p>
-    
+      <h2 data-i18n="jhener-h2">Ejercicios resueltos — Jhener Calvache</h2>
+      <p data-i18n="jhener-p1">En esta sección se resuelven las cónicas partiendo de la ecuación general hacia la forma estándar para identificar sus elementos principales.</p>
+
       <div class="exercise-block ex-circunferencia" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬤</span> Ejercicio 1 — Circunferencia
+          <span>⬤</span> <span data-i18n="jhener-ex1-header">Ejercicio 1 — Circunferencia</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">x² + y² - 8x + 12 = 0</div>
-          <p>Completamos el cuadrado para x: (x² - 8x + 16) + y² = -12 + 16</p>
-          <div class="result">✅ (x - 4)² + y² = 4 | Centro (4,0), Radio r=2</div>
+          <p data-i18n="jhener-ex1-p1">Completamos el cuadrado para x: (x² - 8x + 16) + y² = -12 + 16</p>
+          <div class="result" data-i18n="jhener-ex1-result">✅ (x - 4)² + y² = 4 | Centro (4,0), Radio r=2</div>
           <img src="public/circulo_jhener.png" alt="Gráfica Círculo Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
-    
+
       <div class="exercise-block ex-parabola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌒</span> Ejercicio 2 — Parábola
+          <span>⌒</span> <span data-i18n="jhener-ex2-header">Ejercicio 2 — Parábola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">y² + 16x - 64 = 0</div>
-          <p>Despejamos y factorizamos: y² = -16(x - 4)</p>
-          <div class="result">✅ Vértice (4,0) | Abre hacia la izquierda (p = -4)</div>
+          <p data-i18n="jhener-ex2-p1">Despejamos y factorizamos: y² = -16(x - 4)</p>
+          <div class="result" data-i18n="jhener-ex2-result">✅ Vértice (4,0) | Abre hacia la izquierda (p = -4)</div>
           <img src="public/parabola_jhener.png" alt="Gráfica Parábola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
-    
+
       <div class="exercise-block ex-elipse" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⬭</span> Ejercicio 3 — Elipse
+          <span>⬭</span> <span data-i18n="jhener-ex3-header">Ejercicio 3 — Elipse</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">9x² + 4y² - 72x + 108 = 0</div>
-          <p>Tras completar cuadrados y dividir entre 36:</p>
-          <div class="result">✅ (x-4)²/4 + y²/9 = 1 | Centro (4,0), Eje mayor vertical</div>
+          <p data-i18n="jhener-ex3-p1">Tras completar cuadrados y dividir entre 36:</p>
+          <div class="result" data-i18n="jhener-ex3-result">✅ (x-4)²/4 + y²/9 = 1 | Centro (4,0), Eje mayor vertical</div>
           <img src="public/elipse_jhener.png" alt="Gráfica Elipse Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
-    
+
       <div class="exercise-block ex-hiperbola" onclick="toggle(this)">
         <div class="exercise-header">
-          <span>⌓</span> Ejercicio 4 — Hipérbola
+          <span>⌓</span> <span data-i18n="jhener-ex4-header">Ejercicio 4 — Hipérbola</span>
           <span class="chevron">▾</span>
         </div>
         <div class="collapsible exercise-body">
           <div class="eq">16x² - 9y² - 128x + 112 = 0</div>
-          <p>Tras completar cuadrados y dividir entre 144:</p>
-          <div class="result">✅ (x-4)²/9 - y²/16 = 1 | Centro (4,0), Horizontal</div>
+          <p data-i18n="jhener-ex4-p1">Tras completar cuadrados y dividir entre 144:</p>
+          <div class="result" data-i18n="jhener-ex4-result">✅ (x-4)²/9 - y²/16 = 1 | Centro (4,0), Horizontal</div>
           <img src="public/hiperbola_jhener.png" alt="Gráfica Hipérbola Jhener" style="width:100%; margin-top:10px; border-radius:4px;">
         </div>
       </div>
@@ -1027,38 +1051,38 @@
 
     <!-- HERRAMIENTAS -->
     <section id="herramientas">
-      <h2>Herramientas TIC para graficar cónicas</h2>
-      <p>Existen herramientas digitales gratuitas que permiten visualizar cónicas en tiempo real. Son muy útiles para comprobar los resultados de los ejercicios.</p>
+      <h2 data-i18n="tools-h2">Herramientas TIC para graficar cónicas</h2>
+      <p data-i18n="tools-p1">Existen herramientas digitales gratuitas que permiten visualizar cónicas en tiempo real. Son muy útiles para comprobar los resultados de los ejercicios.</p>
       <div class="tool-cards">
         <div class="tool-card">
-          <h4>GeoGebra Clásico</h4>
-          <p>Ingresa la ecuación en la barra alfanumérica (ej. <code>x^2/9 + y^2/4 = 1</code>) y la herramienta genera automáticamente la gráfica. Permite usar "deslizadores" para modificar a, b, h, k en tiempo real.</p>
-          <a class="tool-link" href="https://www.geogebra.org/classic?lang=es" target="_blank">→ Abrir GeoGebra</a>
+          <h4 data-i18n="geogebra-h4">GeoGebra Clásico</h4>
+          <p data-i18n-html="geogebra-p">Ingresa la ecuación en la barra alfanumérica (ej. <code>x^2/9 + y^2/4 = 1</code>) y la herramienta genera automáticamente la gráfica. Permite usar "deslizadores" para modificar a, b, h, k en tiempo real.</p>
+          <a class="tool-link" href="https://www.geogebra.org/classic?lang=es" target="_blank" data-i18n="geogebra-link">→ Abrir GeoGebra</a>
         </div>
         <div class="tool-card">
-          <h4>Desmos</h4>
-          <p>Calculadora gráfica en línea muy intuitiva. Escribe la ecuación en la barra izquierda, presiona Enter y la gráfica aparece de inmediato. También soporta deslizadores y zoom.</p>
-          <a class="tool-link" href="https://www.desmos.com/calculator" target="_blank">→ Abrir Desmos</a>
+          <h4 data-i18n="desmos-h4">Desmos</h4>
+          <p data-i18n="desmos-p">Calculadora gráfica en línea muy intuitiva. Escribe la ecuación en la barra izquierda, presiona Enter y la gráfica aparece de inmediato. También soporta deslizadores y zoom.</p>
+          <a class="tool-link" href="https://www.desmos.com/calculator" target="_blank" data-i18n="desmos-link">→ Abrir Desmos</a>
         </div>
         <div class="tool-card">
-          <h4>Symbolab</h4>
-          <p>Es una calculadora paso a paso. Se usa ingresando la ecuación general; la herramienta no solo muestra la gráfica, sino que desglosa el proceso analítico de completar el cuadrado.</p>
-          <a class="tool-link" href="https://es.symbolab.com/solver/geometry-calculator" target="_blank">→ Abrir Symbolab</a>
+          <h4 data-i18n="symbolab-h4">Symbolab</h4>
+          <p data-i18n="symbolab-p">Es una calculadora paso a paso. Se usa ingresando la ecuación general; la herramienta no solo muestra la gráfica, sino que desglosa el proceso analítico de completar el cuadrado.</p>
+          <a class="tool-link" href="https://es.symbolab.com/solver/geometry-calculator" target="_blank" data-i18n="symbolab-link">→ Abrir Symbolab</a>
         </div>
       </div>
 
-      <h3>Ecuaciones para ingresar en las herramientas</h3>
+      <h3 data-i18n="tools-h3">Ecuaciones para ingresar en las herramientas</h3>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-family:'Fira Mono',monospace; font-size:0.78rem; margin-top:0.8rem;">
-        <div style="background:var(--blue-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--blue);">Circunferencia:<br>(x-h)^2 + (y-k)^2 = r^2</div>
-        <div style="background:var(--green-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--green);">Parábola:<br>y = (x-h)^2 + k</div>
-        <div style="background:var(--purple-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--purple);">Elipse:<br>(x-h)^2/a^2 + (y-k)^2/b^2 = 1</div>
-        <div style="background:var(--accent-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--accent);">Hipérbola:<br>(x-h)^2/a^2 - (y-k)^2/b^2 = 1</div>
+        <div style="background:var(--blue-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--blue);"><span data-i18n="tools-circle-label">Circunferencia:</span><br>(x-h)^2 + (y-k)^2 = r^2</div>
+        <div style="background:var(--green-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--green);"><span data-i18n="tools-parabola-label">Parábola:</span><br>y = (x-h)^2 + k</div>
+        <div style="background:var(--purple-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--purple);"><span data-i18n="tools-ellipse-label">Elipse:</span><br>(x-h)^2/a^2 + (y-k)^2/b^2 = 1</div>
+        <div style="background:var(--accent-bg); padding:0.5rem 0.8rem; border-radius:4px; color:var(--accent);"><span data-i18n="tools-hyperbola-label">Hipérbola:</span><br>(x-h)^2/a^2 - (y-k)^2/b^2 = 1</div>
       </div>
     </section>
 
     <!-- REFERENCIAS -->
     <section id="referencias">
-      <h2>Referencias bibliográficas</h2>
+      <h2 data-i18n="refs-h2">Referencias bibliográficas</h2>
       <ul class="ref-list">
         <li>Boyer, Carl B. (2004). <em>History of Analytic Geometry</em>. Dover Publications. ISBN 978-0486438320.</li>
         <li>Lehmann, Charles H. <em>Geometría Analítica</em>. Editorial Limusa. ISBN 978-968-18-1176-1.</li>
@@ -1067,9 +1091,9 @@
         <li>Ruiz Sancho, J. M. (2004). <em>Geometría analítica, Bachillerato</em>. Editorial Anaya.</li>
         <li>González Urbaneja, P. M. (2004). <em>Los orígenes de la geometría analítica</em>. Fundación Canaria Orotava.</li>
         <li>Katz, Victor J. (1998). <em>A History of Mathematics: An Introduction</em>. Addison Wesley Longman.</li>
-        <li>GeoGebra Clásico. Herramienta dinámica para modelado y graficación de cónicas.</li>
-        <li>Wikipedia. "Geometría analítica". Enciclopedia libre con revisión comunitaria.</li>
-        <li>Symbolab. Calculadora paso a paso de secciones cónicas y álgebra. https://es.symbolab.com/</li>
+        <li data-i18n="ref-8">GeoGebra Clásico. Herramienta dinámica para modelado y graficación de cónicas.</li>
+        <li data-i18n="ref-9">Wikipedia. "Geometría analítica". Enciclopedia libre con revisión comunitaria.</li>
+        <li data-i18n="ref-10">Symbolab. Calculadora paso a paso de secciones cónicas y álgebra. https://es.symbolab.com/</li>
       </ul>
     </section>
 
@@ -1077,6 +1101,374 @@
 </div>
 
 <script>
+  const i18n = {
+    current: 'es',
+    data: {
+      es: {
+        'header-tag': 'Fundamentos de Matemáticas · Areandina 2026',
+        'toc-title': 'Tabla de contenido',
+        'toc-s-intro': 'Introducción',
+        'toc-s-conics': 'Las cuatro cónicas',
+        'toc-s-exercises': 'Ejercicios resueltos',
+        'toc-s-tools': 'Herramientas TIC',
+        'toc-s-refs': 'Referencias',
+        'toc-what-conics': '¿Qué son las cónicas?',
+        'toc-overview': 'Resumen de formas',
+        'toc-circle': 'Circunferencia',
+        'toc-parabola': 'Parábola',
+        'toc-ellipse': 'Elipse',
+        'toc-hyperbola': 'Hipérbola',
+        'toc-kevin-sub': '· Completar cuadrado',
+        'toc-jonathan-sub': '· Datos geométricos',
+        'toc-frank-sub': '· Completar cuadrado',
+        'toc-jhener-sub': '· Completar cuadrado',
+        'toc-tools-link': 'GeoGebra y Desmos',
+        'toc-bibliography': 'Bibliografía',
+        'article-label': 'Geometría Analítica · Eje 4 — Teoría de las Cónicas',
+        'article-title': 'Curvas Cónicas y su Geometría',
+        'article-institution': 'Ing. de Software, Fundación Universitaria Areandina',
+        'article-date': '27 de abril de 2026',
+        'ib-title': 'Ficha de las Cónicas',
+        'ib-area-k': 'Área',
+        'ib-area-v': 'Geometría Analítica',
+        'ib-types-k': 'Tipos',
+        'ib-types-v': 'Circunferencia, Parábola, Elipse, Hipérbola',
+        'ib-origin-k': 'Origen',
+        'ib-origin-v': 'Sección de un cono con un plano',
+        'ib-tool-k': 'Herramienta',
+        'ib-technique-k': 'Técnica clave',
+        'ib-technique-v': 'Completar el cuadrado',
+        'ib-general-k': 'Forma general',
+        'intro-h2': '¿Qué son las curvas cónicas?',
+        'intro-p1': 'Las <strong>cónicas</strong> son curvas que se obtienen al cortar un cono doble con un plano. Dependiendo del ángulo de corte, obtenemos cuatro figuras distintas: la <em>circunferencia</em>, la <em>elipse</em>, la <em>parábola</em> y la <em>hipérbola</em>.',
+        'intro-p2': 'En geometría analítica, cada una tiene una ecuación característica que relaciona las coordenadas <strong>x</strong> e <strong>y</strong> de todos sus puntos. La clave para trabajar con ellas es aprender a identificarlas y a transformar su ecuación de la <em>forma general</em> a la <em>forma estándar</em>.',
+        'intro-note': '<strong>💡 Consejo clave:</strong> La técnica más importante para transformar ecuaciones cónicas se llama <em>"completar el cuadrado"</em>. La estudiaremos paso a paso en los ejercicios resueltos.',
+        'resumen-h2': 'Las cuatro cónicas de un vistazo',
+        'card-circle-name': 'Circunferencia',
+        'card-circle-p': 'Caso especial de elipse donde ambos ejes son iguales. Todos los puntos equidistan del centro.',
+        'card-parabola-name': 'Parábola',
+        'card-parabola-p': 'Equidista de un punto fijo (foco) y una recta fija (directriz). Abre hacia un lado.',
+        'card-ellipse-name': 'Elipse',
+        'card-ellipse-p': 'La <em>suma</em> de distancias a dos focos es constante. Tiene eje mayor y eje menor.',
+        'card-hyperbola-name': 'Hipérbola',
+        'card-hyperbola-p': 'La <em>diferencia</em> de distancias a dos focos es constante. Tiene dos ramas y asíntotas.',
+        'circle-h2': 'Circunferencia (El Círculo)',
+        'circle-p1': 'Es el <strong>lugar geométrico</strong> de todos los puntos que están a la misma distancia <em>r</em> (radio) de un punto fijo llamado <strong>centro (h, k)</strong>. Es un caso particular de la elipse donde los dos ejes son iguales.',
+        'circle-h3': 'Forma estándar',
+        'circle-p2': 'Su ecuación canónica es:',
+        'circle-p3': 'Donde <code>(h, k)</code> es el centro y <code>r</code> es el radio. Cuando el centro está en el origen, se simplifica a <code>x² + y² = r²</code>.',
+        'parabola-h2': 'Parábola',
+        'parabola-p1': 'Es el lugar geométrico de los puntos que <strong>equidistan</strong> de un punto fijo llamado <em>foco</em> y de una recta fija llamada <em>directriz</em>. Su ecuación general más conocida es <code>y = ax² + bx + c</code>.',
+        'parabola-h3': 'Formas estándar',
+        'parabola-p2': 'Dependiendo de la orientación de apertura:',
+        'parabola-horizontal': 'Horizontal:',
+        'parabola-vertical': 'Vertical:',
+        'parabola-p3': 'El <strong>vértice</strong> es <code>(h, k)</code> y <strong>p</strong> determina la distancia al foco. Si p > 0 abre a la derecha/arriba; si p &lt; 0 abre a la izquierda/abajo.',
+        'ellipse-h2': 'Elipse',
+        'ellipse-p1': 'Es el lugar geométrico de los puntos tal que la <strong>suma</strong> de sus distancias a dos puntos fijos llamados <em>focos</em> es siempre igual a una constante <strong>2a</strong>. Sus elementos son: centro (h,k), eje mayor (2a), eje menor (2b) y distancia focal (2c).',
+        'ellipse-h3': 'Forma estándar',
+        'ellipse-p2': 'Relación fundamental: <code>c² = a² − b²</code>. Si <strong>a² > b²</strong>, el eje mayor es horizontal; si <strong>b² > a²</strong>, el eje mayor es vertical.',
+        'hyperbola-h2': 'Hipérbola',
+        'hyperbola-p1': 'Es el lugar geométrico de los puntos tal que la <strong>diferencia</strong> (en valor absoluto) de sus distancias a dos focos es constante e igual a <strong>2a</strong>. Se distingue visualmente por tener dos ramas separadas y unas líneas guía llamadas <em>asíntotas</em>.',
+        'hyperbola-h3': 'Forma estándar',
+        'hyperbola-p2': 'Las <strong>asíntotas</strong> son las rectas <code>y − k = ±(b/a)(x − h)</code>. La hipérbola se aproxima a ellas infinitamente sin tocarlas nunca.',
+        'kevin-h2': 'Ejercicios resueltos — Kevin Gómez',
+        'kevin-p1': 'Estos ejercicios parten de ecuaciones en <em>forma general</em> y las transforman a <em>forma estándar</em> mediante la técnica de <strong>completar el cuadrado</strong>.',
+        'kevin-note': '<strong>📐 ¿Cómo completar el cuadrado?</strong> Tomamos el coeficiente del término lineal, lo dividimos entre 2 y lo elevamos al cuadrado. Ese número se suma a <em>ambos lados</em> de la ecuación para mantener la igualdad.',
+        'eq-label': 'Ecuación general:',
+        'kevin-ex1-header': 'Ejercicio 1 — Circunferencia',
+        'kevin-ex1-s1-title': 'Agrupamos x e y y pasamos la constante',
+        'kevin-ex1-s2-title': 'Completamos el cuadrado',
+        'kevin-ex1-s2-text': 'Para x: (4÷2)² = 4 · Para y: (6÷2)² = 9. Se suman a ambos lados.',
+        'kevin-ex1-s3-title': 'Forma estándar final',
+        'kevin-ex1-result': '✅ Centro (−2, 3) · Radio r = 2',
+        'kevin-ex2-header': 'Ejercicio 2 — Parábola',
+        'kevin-ex2-s1-title': 'Agrupamos y, pasamos x al otro lado',
+        'kevin-ex2-s2-title': 'Completamos el cuadrado en y',
+        'kevin-ex2-s2-text': 'Para y: (6÷2)² = 9. Sumamos 9 a ambos lados.',
+        'kevin-ex2-s3-title': 'Simplificamos y factorizamos',
+        'kevin-ex2-result': '✅ Vértice (−2, 3) · Abre hacia la derecha (p > 0)',
+        'kevin-ex3-header': 'Ejercicio 3 — Elipse',
+        'kevin-ex3-s1-title': 'Agrupamos y factorizamos coeficientes',
+        'kevin-ex3-s2-title': 'Completamos el cuadrado (¡ojo con los coeficientes!)',
+        'kevin-ex3-s2-text': 'Lo que agregamos dentro del paréntesis se multiplica por el factor de afuera: 25×4 = 100 y 16×9 = 144.',
+        'kevin-ex3-s3-title': 'Simplificamos y dividimos entre 400',
+        'kevin-ex3-result': '✅ Centro (−2, 3) · a² = 25 (eje mayor vertical) · b² = 16',
+        'kevin-ex4-header': 'Ejercicio 4 — Hipérbola',
+        'kevin-ex4-s1-title': 'Agrupamos y factorizamos (¡cuidado con el signo negativo!)',
+        'kevin-ex4-s2-title': 'Completamos el cuadrado',
+        'kevin-ex4-s2-text': 'El término de y se <em>resta</em> por el −16 de afuera: 252 + 36 − 144 = 144.',
+        'kevin-ex4-s3-title': 'Dividimos todo entre 144',
+        'kevin-ex4-result': '✅ Centro (−2, 3) · Abre horizontalmente · a² = 16 · b² = 9',
+        'jonathan-h2': 'Ejercicios resueltos — Jonathan Díaz',
+        'jonathan-p1': 'Estos ejercicios parten de <em>datos geométricos</em> (centros, vértices, puntos) para construir la ecuación de la cónica.',
+        'jonathan-ex1-header': 'Ejercicio 1 — Circunferencia con centro (4,0) por el punto (7,4)',
+        'jonathan-ex1-p1': 'Calculamos el radio usando la fórmula de distancia entre el centro y el punto dado:',
+        'jonathan-ex1-result': '✅ (x − 4)² + y² = 25',
+        'jonathan-ex2-header': 'Ejercicio 2 — Parábola con vértice (4,0) por el punto (6,4)',
+        'jonathan-ex2-p1': 'Sustituimos el punto en la forma estándar para encontrar p:',
+        'jonathan-ex2-result': '✅ y² = 8(x − 4)',
+        'jonathan-ex3-header': 'Ejercicio 3 — Elipse con centro (4,0), vértice (9,0), co-vértice (4,3)',
+        'jonathan-ex3-p1': 'Calculamos a y b midiendo las distancias del centro a los vértices:',
+        'jonathan-ex3-p2': 'Verificación: sustituyendo el vértice (9,0) debe dar 1.',
+        'jonathan-ex3-result': '✅ (x−4)²/25 + y²/9 = 1',
+        'jonathan-ex4-header': 'Ejercicio 4 — Hipérbola con centro (4,0), vértice (7,0), pendiente asíntotas ±2/3',
+        'jonathan-ex4-p1': 'Calculamos a por la distancia centro-vértice, y b por la pendiente de la asíntota b/a:',
+        'jonathan-ex4-p2': 'Verificación sustituyendo el vértice (7,0):',
+        'jonathan-ex4-result': '✅ (x−4)²/9 − y²/4 = 1',
+        'frank-h2': 'Ejercicios resueltos — Franklin Angulo Jimenez',
+        'frank-p1': 'En esta sección se transforman ecuaciones en forma general a su forma estándar usando completar el cuadrado, para identificar centro, vértice y parámetros principales.',
+        'frank-ex1-header': 'Ejercicio 1 — Circunferencia',
+        'frank-ex1-s1': 'Paso 1: (x² - 2x) + (y² - 2y) = 7',
+        'frank-ex1-s2': 'Paso 2: (x² - 2x + 1) + (y² - 2y + 1) = 7 + 1 + 1',
+        'frank-ex1-result': '✅ (x - 1)² + (y - 1)² = 9 | Centro (1,1), Radio r=3',
+        'frank-ex2-header': 'Ejercicio 2 — Parábola',
+        'frank-ex2-s1': 'Paso 1: (x² - 2x) = 8y - 9',
+        'frank-ex2-s2': 'Paso 2: (x² - 2x + 1) = 8y - 9 + 1',
+        'frank-ex2-result': '✅ (x - 1)² = 8(y - 1) | Vértice (1,1), abre hacia arriba, p=2',
+        'frank-ex3-header': 'Ejercicio 3 — Elipse',
+        'frank-ex3-s1': 'Paso 1: 4(x² - 2x) + 9(y² - 2y) = 23',
+        'frank-ex3-s2': 'Paso 2: 4(x² - 2x + 1) + 9(y² - 2y + 1) = 23 + 4 + 9',
+        'frank-ex3-result': '✅ (x - 1)²/9 + (y - 1)²/4 = 1 | Centro (1,1), a=3, b=2',
+        'frank-ex4-header': 'Ejercicio 4 — Hipérbola',
+        'frank-ex4-s1': 'Paso 1: (x² - 2x) - (y² - 2y) = 4',
+        'frank-ex4-s2': 'Paso 2: (x² - 2x + 1) - (y² - 2y + 1) = 4 + 1 - 1',
+        'frank-ex4-result': '✅ (x - 1)²/4 - (y - 1)²/4 = 1 | Centro (1,1), a=2, b=2',
+        'jhener-h2': 'Ejercicios resueltos — Jhener Calvache',
+        'jhener-p1': 'En esta sección se resuelven las cónicas partiendo de la ecuación general hacia la forma estándar para identificar sus elementos principales.',
+        'jhener-ex1-header': 'Ejercicio 1 — Circunferencia',
+        'jhener-ex1-p1': 'Completamos el cuadrado para x: (x² - 8x + 16) + y² = -12 + 16',
+        'jhener-ex1-result': '✅ (x - 4)² + y² = 4 | Centro (4,0), Radio r=2',
+        'jhener-ex2-header': 'Ejercicio 2 — Parábola',
+        'jhener-ex2-p1': 'Despejamos y factorizamos: y² = -16(x - 4)',
+        'jhener-ex2-result': '✅ Vértice (4,0) | Abre hacia la izquierda (p = -4)',
+        'jhener-ex3-header': 'Ejercicio 3 — Elipse',
+        'jhener-ex3-p1': 'Tras completar cuadrados y dividir entre 36:',
+        'jhener-ex3-result': '✅ (x-4)²/4 + y²/9 = 1 | Centro (4,0), Eje mayor vertical',
+        'jhener-ex4-header': 'Ejercicio 4 — Hipérbola',
+        'jhener-ex4-p1': 'Tras completar cuadrados y dividir entre 144:',
+        'jhener-ex4-result': '✅ (x-4)²/9 - y²/16 = 1 | Centro (4,0), Horizontal',
+        'tools-h2': 'Herramientas TIC para graficar cónicas',
+        'tools-p1': 'Existen herramientas digitales gratuitas que permiten visualizar cónicas en tiempo real. Son muy útiles para comprobar los resultados de los ejercicios.',
+        'geogebra-h4': 'GeoGebra Clásico',
+        'geogebra-p': 'Ingresa la ecuación en la barra alfanumérica (ej. <code>x^2/9 + y^2/4 = 1</code>) y la herramienta genera automáticamente la gráfica. Permite usar "deslizadores" para modificar a, b, h, k en tiempo real.',
+        'geogebra-link': '→ Abrir GeoGebra',
+        'desmos-h4': 'Desmos',
+        'desmos-p': 'Calculadora gráfica en línea muy intuitiva. Escribe la ecuación en la barra izquierda, presiona Enter y la gráfica aparece de inmediato. También soporta deslizadores y zoom.',
+        'desmos-link': '→ Abrir Desmos',
+        'symbolab-h4': 'Symbolab',
+        'symbolab-p': 'Es una calculadora paso a paso. Se usa ingresando la ecuación general; la herramienta no solo muestra la gráfica, sino que desglosa el proceso analítico de completar el cuadrado.',
+        'symbolab-link': '→ Abrir Symbolab',
+        'tools-h3': 'Ecuaciones para ingresar en las herramientas',
+        'tools-circle-label': 'Circunferencia:',
+        'tools-parabola-label': 'Parábola:',
+        'tools-ellipse-label': 'Elipse:',
+        'tools-hyperbola-label': 'Hipérbola:',
+        'refs-h2': 'Referencias bibliográficas',
+        'ref-8': 'GeoGebra Clásico. Herramienta dinámica para modelado y graficación de cónicas.',
+        'ref-9': 'Wikipedia. "Geometría analítica". Enciclopedia libre con revisión comunitaria.',
+        'ref-10': 'Symbolab. Calculadora paso a paso de secciones cónicas y álgebra. https://es.symbolab.com/'
+      },
+      en: {
+        'header-tag': 'Mathematics Foundations · Areandina 2026',
+        'toc-title': 'Table of Contents',
+        'toc-s-intro': 'Introduction',
+        'toc-s-conics': 'The Four Conics',
+        'toc-s-exercises': 'Solved Exercises',
+        'toc-s-tools': 'ICT Tools',
+        'toc-s-refs': 'References',
+        'toc-what-conics': 'What are the conics?',
+        'toc-overview': 'Shape overview',
+        'toc-circle': 'Circle',
+        'toc-parabola': 'Parabola',
+        'toc-ellipse': 'Ellipse',
+        'toc-hyperbola': 'Hyperbola',
+        'toc-kevin-sub': '· Completing the square',
+        'toc-jonathan-sub': '· Geometric data',
+        'toc-frank-sub': '· Completing the square',
+        'toc-jhener-sub': '· Completing the square',
+        'toc-tools-link': 'GeoGebra and Desmos',
+        'toc-bibliography': 'Bibliography',
+        'article-label': 'Analytic Geometry · Module 4 — Theory of Conics',
+        'article-title': 'Conic Curves and their Geometry',
+        'article-institution': 'Software Engineering, Areandina University Foundation',
+        'article-date': 'April 27, 2026',
+        'ib-title': 'Conics Overview',
+        'ib-area-k': 'Area',
+        'ib-area-v': 'Analytic Geometry',
+        'ib-types-k': 'Types',
+        'ib-types-v': 'Circle, Parabola, Ellipse, Hyperbola',
+        'ib-origin-k': 'Origin',
+        'ib-origin-v': 'Section of a cone with a plane',
+        'ib-tool-k': 'Tool',
+        'ib-technique-k': 'Key technique',
+        'ib-technique-v': 'Completing the square',
+        'ib-general-k': 'General form',
+        'intro-h2': 'What are conic curves?',
+        'intro-p1': 'The <strong>conics</strong> are curves obtained by cutting a double cone with a plane. Depending on the angle of the cut, we get four different figures: the <em>circle</em>, the <em>ellipse</em>, the <em>parabola</em>, and the <em>hyperbola</em>.',
+        'intro-p2': 'In analytic geometry, each one has a characteristic equation relating the coordinates <strong>x</strong> and <strong>y</strong> of all its points. The key to working with them is learning to identify them and to transform their equation from <em>general form</em> to <em>standard form</em>.',
+        'intro-note': '<strong>💡 Key tip:</strong> The most important technique for transforming conic equations is called <em>"completing the square"</em>. We will study it step by step in the solved exercises.',
+        'resumen-h2': 'The four conics at a glance',
+        'card-circle-name': 'Circle',
+        'card-circle-p': 'Special case of an ellipse where both axes are equal. All points are equidistant from the center.',
+        'card-parabola-name': 'Parabola',
+        'card-parabola-p': 'Equidistant from a fixed point (focus) and a fixed line (directrix). Opens to one side.',
+        'card-ellipse-name': 'Ellipse',
+        'card-ellipse-p': 'The <em>sum</em> of distances to two foci is constant. It has a major and minor axis.',
+        'card-hyperbola-name': 'Hyperbola',
+        'card-hyperbola-p': 'The <em>difference</em> of distances to two foci is constant. It has two branches and asymptotes.',
+        'circle-h2': 'Circle',
+        'circle-p1': 'It is the <strong>locus</strong> of all points that are at the same distance <em>r</em> (radius) from a fixed point called the <strong>center (h, k)</strong>. It is a special case of the ellipse where the two axes are equal.',
+        'circle-h3': 'Standard form',
+        'circle-p2': 'Its canonical equation is:',
+        'circle-p3': 'Where <code>(h, k)</code> is the center and <code>r</code> is the radius. When the center is at the origin, it simplifies to <code>x² + y² = r²</code>.',
+        'parabola-h2': 'Parabola',
+        'parabola-p1': 'It is the locus of points that are <strong>equidistant</strong> from a fixed point called the <em>focus</em> and a fixed line called the <em>directrix</em>. Its most well-known general equation is <code>y = ax² + bx + c</code>.',
+        'parabola-h3': 'Standard forms',
+        'parabola-p2': 'Depending on the opening orientation:',
+        'parabola-horizontal': 'Horizontal:',
+        'parabola-vertical': 'Vertical:',
+        'parabola-p3': 'The <strong>vertex</strong> is <code>(h, k)</code> and <strong>p</strong> determines the distance to the focus. If p > 0 it opens right/up; if p &lt; 0 it opens left/down.',
+        'ellipse-h2': 'Ellipse',
+        'ellipse-p1': 'It is the locus of points such that the <strong>sum</strong> of their distances to two fixed points called <em>foci</em> is always equal to a constant <strong>2a</strong>. Its elements are: center (h,k), major axis (2a), minor axis (2b), and focal distance (2c).',
+        'ellipse-h3': 'Standard form',
+        'ellipse-p2': 'Fundamental relation: <code>c² = a² − b²</code>. If <strong>a² > b²</strong>, the major axis is horizontal; if <strong>b² > a²</strong>, the major axis is vertical.',
+        'hyperbola-h2': 'Hyperbola',
+        'hyperbola-p1': 'It is the locus of points such that the <strong>difference</strong> (in absolute value) of their distances to two foci is constant and equal to <strong>2a</strong>. It is visually distinguished by having two separate branches and guide lines called <em>asymptotes</em>.',
+        'hyperbola-h3': 'Standard form',
+        'hyperbola-p2': 'The <strong>asymptotes</strong> are the lines <code>y − k = ±(b/a)(x − h)</code>. The hyperbola approaches them infinitely without ever touching them.',
+        'kevin-h2': 'Solved Exercises — Kevin Gómez',
+        'kevin-p1': 'These exercises start with equations in <em>general form</em> and transform them to <em>standard form</em> using the technique of <strong>completing the square</strong>.',
+        'kevin-note': '<strong>📐 How to complete the square?</strong> We take the coefficient of the linear term, divide it by 2, and square it. That number is added to <em>both sides</em> of the equation to maintain equality.',
+        'eq-label': 'General equation:',
+        'kevin-ex1-header': 'Exercise 1 — Circle',
+        'kevin-ex1-s1-title': 'Group x and y terms and move the constant',
+        'kevin-ex1-s2-title': 'Complete the square',
+        'kevin-ex1-s2-text': 'For x: (4÷2)² = 4 · For y: (6÷2)² = 9. Add to both sides.',
+        'kevin-ex1-s3-title': 'Final standard form',
+        'kevin-ex1-result': '✅ Center (−2, 3) · Radius r = 2',
+        'kevin-ex2-header': 'Exercise 2 — Parabola',
+        'kevin-ex2-s1-title': 'Group y terms, move x to the other side',
+        'kevin-ex2-s2-title': 'Complete the square in y',
+        'kevin-ex2-s2-text': 'For y: (6÷2)² = 9. Add 9 to both sides.',
+        'kevin-ex2-s3-title': 'Simplify and factor',
+        'kevin-ex2-result': '✅ Vertex (−2, 3) · Opens to the right (p > 0)',
+        'kevin-ex3-header': 'Exercise 3 — Ellipse',
+        'kevin-ex3-s1-title': 'Group and factor out coefficients',
+        'kevin-ex3-s2-title': 'Complete the square (watch the coefficients!)',
+        'kevin-ex3-s2-text': 'What we add inside the parentheses is multiplied by the outer factor: 25×4 = 100 and 16×9 = 144.',
+        'kevin-ex3-s3-title': 'Simplify and divide by 400',
+        'kevin-ex3-result': '✅ Center (−2, 3) · a² = 25 (vertical major axis) · b² = 16',
+        'kevin-ex4-header': 'Exercise 4 — Hyperbola',
+        'kevin-ex4-s1-title': 'Group and factor (watch the negative sign!)',
+        'kevin-ex4-s2-title': 'Complete the square',
+        'kevin-ex4-s2-text': 'The y term is <em>subtracted</em> because of the −16 outside: 252 + 36 − 144 = 144.',
+        'kevin-ex4-s3-title': 'Divide everything by 144',
+        'kevin-ex4-result': '✅ Center (−2, 3) · Opens horizontally · a² = 16 · b² = 9',
+        'jonathan-h2': 'Solved Exercises — Jonathan Díaz',
+        'jonathan-p1': 'These exercises start from <em>geometric data</em> (centers, vertices, points) to build the conic equation.',
+        'jonathan-ex1-header': 'Exercise 1 — Circle with center (4,0) through point (7,4)',
+        'jonathan-ex1-p1': 'We calculate the radius using the distance formula between the center and the given point:',
+        'jonathan-ex1-result': '✅ (x − 4)² + y² = 25',
+        'jonathan-ex2-header': 'Exercise 2 — Parabola with vertex (4,0) through point (6,4)',
+        'jonathan-ex2-p1': 'We substitute the point in the standard form to find p:',
+        'jonathan-ex2-result': '✅ y² = 8(x − 4)',
+        'jonathan-ex3-header': 'Exercise 3 — Ellipse with center (4,0), vertex (9,0), co-vertex (4,3)',
+        'jonathan-ex3-p1': 'We calculate a and b by measuring distances from center to vertices:',
+        'jonathan-ex3-p2': 'Verification: substituting vertex (9,0) should give 1.',
+        'jonathan-ex3-result': '✅ (x−4)²/25 + y²/9 = 1',
+        'jonathan-ex4-header': 'Exercise 4 — Hyperbola with center (4,0), vertex (7,0), asymptote slope ±2/3',
+        'jonathan-ex4-p1': 'We calculate a from the center-vertex distance, and b from the asymptote slope b/a:',
+        'jonathan-ex4-p2': 'Verification substituting vertex (7,0):',
+        'jonathan-ex4-result': '✅ (x−4)²/9 − y²/4 = 1',
+        'frank-h2': 'Solved Exercises — Franklin Angulo Jimenez',
+        'frank-p1': 'In this section, equations in general form are transformed to their standard form using completing the square, to identify the center, vertex, and main parameters.',
+        'frank-ex1-header': 'Exercise 1 — Circle',
+        'frank-ex1-s1': 'Step 1: (x² - 2x) + (y² - 2y) = 7',
+        'frank-ex1-s2': 'Step 2: (x² - 2x + 1) + (y² - 2y + 1) = 7 + 1 + 1',
+        'frank-ex1-result': '✅ (x - 1)² + (y - 1)² = 9 | Center (1,1), Radius r=3',
+        'frank-ex2-header': 'Exercise 2 — Parabola',
+        'frank-ex2-s1': 'Step 1: (x² - 2x) = 8y - 9',
+        'frank-ex2-s2': 'Step 2: (x² - 2x + 1) = 8y - 9 + 1',
+        'frank-ex2-result': '✅ (x - 1)² = 8(y - 1) | Vertex (1,1), opens upward, p=2',
+        'frank-ex3-header': 'Exercise 3 — Ellipse',
+        'frank-ex3-s1': 'Step 1: 4(x² - 2x) + 9(y² - 2y) = 23',
+        'frank-ex3-s2': 'Step 2: 4(x² - 2x + 1) + 9(y² - 2y + 1) = 23 + 4 + 9',
+        'frank-ex3-result': '✅ (x - 1)²/9 + (y - 1)²/4 = 1 | Center (1,1), a=3, b=2',
+        'frank-ex4-header': 'Exercise 4 — Hyperbola',
+        'frank-ex4-s1': 'Step 1: (x² - 2x) - (y² - 2y) = 4',
+        'frank-ex4-s2': 'Step 2: (x² - 2x + 1) - (y² - 2y + 1) = 4 + 1 - 1',
+        'frank-ex4-result': '✅ (x - 1)²/4 - (y - 1)²/4 = 1 | Center (1,1), a=2, b=2',
+        'jhener-h2': 'Solved Exercises — Jhener Calvache',
+        'jhener-p1': 'In this section, conics are solved starting from the general equation toward the standard form to identify their main elements.',
+        'jhener-ex1-header': 'Exercise 1 — Circle',
+        'jhener-ex1-p1': 'Complete the square for x: (x² - 8x + 16) + y² = -12 + 16',
+        'jhener-ex1-result': '✅ (x - 4)² + y² = 4 | Center (4,0), Radius r=2',
+        'jhener-ex2-header': 'Exercise 2 — Parabola',
+        'jhener-ex2-p1': 'Isolate and factor: y² = -16(x - 4)',
+        'jhener-ex2-result': '✅ Vertex (4,0) | Opens to the left (p = -4)',
+        'jhener-ex3-header': 'Exercise 3 — Ellipse',
+        'jhener-ex3-p1': 'After completing the squares and dividing by 36:',
+        'jhener-ex3-result': '✅ (x-4)²/4 + y²/9 = 1 | Center (4,0), Vertical major axis',
+        'jhener-ex4-header': 'Exercise 4 — Hyperbola',
+        'jhener-ex4-p1': 'After completing the squares and dividing by 144:',
+        'jhener-ex4-result': '✅ (x-4)²/9 - y²/16 = 1 | Center (4,0), Horizontal',
+        'tools-h2': 'ICT Tools for graphing conics',
+        'tools-p1': 'There are free digital tools that allow you to visualize conics in real time. They are very useful for checking the results of exercises.',
+        'geogebra-h4': 'GeoGebra Classic',
+        'geogebra-p': 'Enter the equation in the alphanumeric bar (e.g. <code>x^2/9 + y^2/4 = 1</code>) and the tool automatically generates the graph. You can use "sliders" to modify a, b, h, k in real time.',
+        'geogebra-link': '→ Open GeoGebra',
+        'desmos-h4': 'Desmos',
+        'desmos-p': 'Very intuitive online graphing calculator. Type the equation in the left bar, press Enter, and the graph appears immediately. Also supports sliders and zoom.',
+        'desmos-link': '→ Open Desmos',
+        'symbolab-h4': 'Symbolab',
+        'symbolab-p': 'A step-by-step calculator. Enter the general equation; the tool not only shows the graph but breaks down the analytical process of completing the square.',
+        'symbolab-link': '→ Open Symbolab',
+        'tools-h3': 'Equations to enter in the tools',
+        'tools-circle-label': 'Circle:',
+        'tools-parabola-label': 'Parabola:',
+        'tools-ellipse-label': 'Ellipse:',
+        'tools-hyperbola-label': 'Hyperbola:',
+        'refs-h2': 'Bibliographic References',
+        'ref-8': 'GeoGebra Classic. Dynamic tool for modeling and graphing conics.',
+        'ref-9': 'Wikipedia. "Analytic geometry". Free encyclopedia with community review.',
+        'ref-10': 'Symbolab. Step-by-step calculator for conic sections and algebra. https://es.symbolab.com/'
+      }
+    }
+  };
+
+  function applyLang(lang) {
+    const dict = i18n.data[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-html');
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.lang = lang;
+    document.title = lang === 'en'
+      ? 'Wiki — Analytic Geometry: Conics'
+      : 'Wiki — Geometría Analítica: Cónicas';
+  }
+
+  function toggleLang() {
+    i18n.current = i18n.current === 'es' ? 'en' : 'es';
+    var btn = document.getElementById('lang-toggle');
+    var label = document.getElementById('lang-label');
+    if (i18n.current === 'en') {
+      label.textContent = 'ES';
+      btn.title = 'Cambiar a español';
+      btn.classList.add('active');
+    } else {
+      label.textContent = 'EN';
+      btn.title = 'Translate to English';
+      btn.classList.remove('active');
+    }
+    applyLang(i18n.current);
+  }
+
   function toggle(el) {
     el.classList.toggle('collapsed');
   }
